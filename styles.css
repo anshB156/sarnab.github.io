@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #df47cad2; 
+}
+
+.image-container {
+  position: relative;
+  text-align: center;
+}
+
+.centered-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image-text {
+  position: absolute;
+  top: px; 
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: #0fe2ad; /* Text color */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+  padding: 10px 20px;
+  border-radius: 5px;
+}
