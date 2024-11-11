@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="style.css" />
     <style>
         /* Terms Overlay Styling */
-        .main-content {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .blur {
             filter: blur(5px);
             transition: filter 0.3s ease;
         }
@@ -82,42 +87,6 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">Sarnab Bhattacharjee</div>
-        <div class="nav-items">
-            <a href="">Home</a>
-            <a href="">About</a>
-            <a href="potfolio_index.html">Portfolio</a>
-        </div>
-    </nav>
-    <section class="hero main-content" id="mainContent">
-        <div class="hero-container">
-            <div class="column-left">
-                <h1>Say hello to my webpage!</h1>
-                <p>This website (DEMO/Practice) has been built and designed by an entry-level coder named "Sarnab Bhattacharjee". All things gathered here by me are free and open-source. And also to remind you, I don't own some parts too! A little help from here and there.</p><br>
-                <button onclick="location.href='signin.html'" class="cssbuttons-io-button">
-                    Get started
-                    <div class="icon">
-                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                        </svg>
-                    </div>
-                </button><br>
-                <div class="input-wrapper">
-                    <button class="icon">
-                        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M22 22L20 20" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </button>
-                    <input type="text" name="text" class="input" placeholder="search.." />
-                </div>
-            </div>
-            <div class="column-right"></div>
-        </div>
-    </section>
-    <!-- Terms and Services Overlay -->
     <div class="terms-overlay" id="termsOverlay">
         <div class="terms-container">
             <h2>Terms and Services</h2>
@@ -130,10 +99,47 @@
             <button class="terms-button" onclick="location.href='termser.html'">The Terms & Services</button>
         </div>
     </div>
+    <div class="blur" id="mainContent">
+        <nav>
+            <div class="logo">Sarnab Bhattacharjee</div>
+            <div class="nav-items">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="potfolio_index.html">Portfolio</a>
+            </div>
+        </nav>
+        <section class="hero">
+            <div class="hero-container">
+                <div class="column-left">
+                    <h1>Say hello to my webpage!</h1>
+                    <p>This website (DEMO/Practice) has been built and designed by an entry-level coder named "Sarnab Bhattacharjee". All things gathered here by me are free and open-source. And also to remind you, I don't own some parts too! A little help from here and there.</p><br>
+                    <button onclick="location.href='signin.html'" class="cssbuttons-io-button">
+                        Get started
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button><br>
+                    <div class="input-wrapper">
+                        <button class="icon">
+                            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M22 22L20 20" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        </button>
+                        <input type="text" name="text" class="input" placeholder="search.." />
+                    </div>
+                </div>
+                <div class="column-right"></div>
+            </div>
+        </section>
+    </div>
     <script>
         function acceptTerms() {
             document.getElementById('termsOverlay').style.display = 'none';
-            document.getElementById('mainContent').style.filter = 'none';
+            document.getElementById('mainContent').classList.remove('blur');
         }
 
         function denyTerms() {
