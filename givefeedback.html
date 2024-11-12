@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Give Feedback</title>
+  <link rel="stylesheet" href="loaderstyle.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .feedback-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 2em;
+      color: #ffe600;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    textarea {
+      resize: none;
+      height: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #ffe600;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    button:hover {
+      background: #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader"></div>
+  <div id="content" style="display: none;">
+    <div class="feedback-container">
+      <h2>Give Us Your Feedback!</h2>
+      <p>We value your feedback and would love to hear your thoughts.</p>
+<iframe src="https://forms.gle/1fCCDRe5kNpFCXcq9" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
