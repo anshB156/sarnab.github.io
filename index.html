@@ -7,109 +7,144 @@
     <link rel="stylesheet" href="style.css" />
     <style>
         /* Terms Overlay Styling */
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .blur { filter: blur(5px); transition: filter 0.3s ease; }
-        .terms-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.3s ease; }
-        .terms-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 600px; text-align: center; }
-        .terms-container h2 { margin-top: 0; }
-        .terms-container p { margin: 20px 0; }
-        .terms-container button { padding: 10px 20px; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; margin: 0 10px; font-size: 16px; font-weight: bold; text-transform: uppercase; }
-        .terms-container .accept-button { background: linear-gradient(45deg, #4caf50, #81c784); color: white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-        .terms-container .accept-button:hover { background: linear-gradient(45deg, #388e3c, #66bb6a); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
-        .terms-container .deny-button { background: linear-gradient(45deg, #e74c3c, #e57373); color: white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-        .terms-container .deny-button:hover { background: linear-gradient(45deg, #c0392b, #ef5350); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
-        .terms-container .terms-button { background: linear-gradient(45deg, #3498db, #5dade2); color: white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-        .terms-container .terms-button:hover { background: linear-gradient(45deg, #2e86c1, #5499c7); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
-        .terms-container .button-container { margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .blur {
+            filter: blur(5px);
+            transition: filter 0.3s ease;
+        }
+        .terms-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        .terms-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+        .terms-container h2 {
+            margin-top: 0;
+        }
+        .terms-container p {
+            margin: 20px 0;
+        }
+        .terms-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .terms-container .accept-button {
+            background: linear-gradient(45deg, #4caf50, #81c784);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .terms-container .accept-button:hover {
+            background: linear-gradient(45deg, #388e3c, #66bb6a);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .terms-container .deny-button {
+            background: linear-gradient(45deg, #e74c3c, #e57373);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .terms-container .deny-button:hover {
+            background: linear-gradient(45deg, #c0392b, #ef5350);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .terms-container .terms-button {
+            background: linear-gradient(45deg, #3498db, #5dade2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .terms-container .terms-button:hover {
+            background: linear-gradient(45deg, #2e86c1, #5499c7);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .terms-container .button-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-<div class="terms-overlay" id="termsOverlay">
-    <div class="terms-container">
-        <h2>Terms and Services</h2>
-        <p>Please accept our terms and services to continue using our website. Everything on this site is open source, created with help from AI, YouTube, and other resources. If you find any content that you believe belongs to you, please contact us immediately for removal. We also do not take responsibility for user-published content. For any issues or concerns, please reach out to us for a peaceful resolution. Your patience is appreciated as we balance our coding journey and studies.</p>
-        <div class="button-container">
-            <button class="accept-button" onclick="acceptTerms()">Accept</button>
-            <button class="deny-button" onclick="denyTerms()">Deny</button>
-        </div>
-        <br>
-        <button class="terms-button" onclick="location.href='termser.html'">The Terms & Services</button>
-    </div>
-</div>
-<div class="blur" id="mainContent">
-    <nav>
-        <div class="logo">Sarnab Bhattacharjee</div>
-        <div class="nav-items">
-            <a href="">Home</a>
-            <a href="">About</a>
-            <a href="potfolio_index.html">Portfolio</a>
-        </div>
-    </nav>
-    <section class="hero">
-        <div class="hero-container">
-            <div class="column-left">
-                <h1>Welcome to My Corner of the Web!</h1>
-                <p>This website (DEMO/Practice) has been built and designed by an entry-level coder named "Sarnab Bhattacharjee". All things gathered here by me are free and open-source. And also to remind you, I don't own some parts too! A little help from here and there.</p><br>
-                <button onclick="location.href='signin.html'" class="cssbuttons-io-button"> Get started
-                    <div class="icon">
-<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                        </svg>
-                    </div>
-                </button><br>
-                <div class="input-wrapper">
-                    <button class="icon">
-<svg width="25px? height="25px? viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M22 22L20 20" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </button>
-                    <input type="text" name="text" class="input" placeholder="search.." />
-                </div>
+    <div class="terms-overlay" id="termsOverlay">
+        <div class="terms-container">
+            <h2>Terms and Services</h2>
+            <p>Please accept our terms and services to continue using our website. Everything on this site is open source, created with help from AI, YouTube, and other resources. If you find any content that you believe belongs to you, please contact us immediately for removal. We also do not take responsibility for user-published content. For any issues or concerns, please reach out to us for a peaceful resolution. Your patience is appreciated as we balance our coding journey and studies.</p>
+            <div class="button-container">
+                <button class="accept-button" onclick="acceptTerms()">Accept</button>
+                <button class="deny-button" onclick="denyTerms()">Deny</button>
             </div>
-            <div class="column-right"></div>
+            <br>
+            <button class="terms-button" onclick="location.href='termser.html'">The Terms & Services</button>
         </div>
-    </section>
-</div>
-<script>
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
- 
-    function getCookie(name) {
-        const nameEQ = name + "=";
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }
- 
-    function acceptTerms() {
-        setCookie("acceptedTerms", "true", 30);
-        document.getElementById('termsOverlay').style.display = 'none';
-        document.getElementById('mainContent').classList.remove('blur');
-    }
- 
-    function denyTerms() {
-        alert("You need to accept the terms to continue using the website.");
-    }
- 
-    window.onload = function() {
-        if (getCookie("acceptedTerms") === "true") {
+    </div>
+    <div class="blur" id="mainContent">
+        <nav>
+            <div class="logo">Sarnab Bhattacharjee</div>
+            <div class="nav-items">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="potfolio_index.html">Portfolio</a>
+            </div>
+        </nav>
+        <section class="hero">
+            <div class="hero-container">
+                <div class="column-left">
+                    <h1>Welcome to My Corner of the Web!</h1>
+                    <p>This website (DEMO/Practice) has been built and designed by an entry-level coder named "Sarnab Bhattacharjee". All things gathered here by me are free and open-source. And also to remind you, I don't own some parts too! A little help from here and there.</p><br>
+                    <button onclick="location.href='signin.html'" class="cssbuttons-io-button">
+                        Get started
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button><br>
+                    <div class="input-wrapper">
+                        <button class="icon">
+                            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M22 22L20 20" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        </button>
+                        <input type="text" name="text" class="input" placeholder="search.." />
+                    </div>
+                </div>
+                <div class="column-right"></div>
+            </div>
+        </section>
+    </div>
+    <script>
+        function acceptTerms() {
             document.getElementById('termsOverlay').style.display = 'none';
             document.getElementById('mainContent').classList.remove('blur');
         }
-    }
-</script>
+
+        function denyTerms() {
+            alert("You need to accept the terms to continue using the website.");
+        }
+    </script>
 </body>
 </html>
