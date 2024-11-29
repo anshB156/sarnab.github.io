@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All About HTML and CSS Tags</title>
+    <link rel="stylesheet" href="topic2.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the World of HTML and CSS</h1>
+        <p>Your one-stop guide to understanding web development.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li> <a href="#html-tags">HTML Tags</a> </li>
+            <li><a href="#css-attributes">CSS Attributes</a></li>
+            <li><a href="#common-uses">Common Use Cases</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="html-tags">
+            <h2>Understanding HTML Tags</h2>
+            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It uses a series of elements to define content structure.</p>
+            <ul>
+                <li><strong>&lt;html&gt;</strong> - The root element of an HTML page.</li>
+                <li><strong>&lt;head&gt;</strong> - Contains meta-information about the document.</li>
+                <li><strong>&lt;title&gt;</strong> - Sets the title of the document shown in browser title bar.</li>
+                <li><strong>&lt;body&gt;</strong> - Defines the body of the document, containing all visible content.</li>
+                <li><strong>&lt;h1&gt; to &lt;h6&gt;</strong> - Header tags that define headings, with &lt;h1&gt; being the most important.</li>
+                <li><strong>&lt;p&gt;</strong> - Defines a paragraph.</li>
+                <li><strong>&lt;a&gt;</strong> - Defines a hyperlink.</li>
+                <li><strong>&lt;img&gt;</strong> - Embeds an image.</li>
+            </ul>
+        </section>
+
+        <section id="css-attributes">
+            <h2>Exploring CSS Attributes</h2>
+            <p>CSS (Cascading Style Sheets) is used to style and layout web pages. It allows you to control the color, font, spacing, and many other aspects of your web design.</p>
+            <ul>
+                <li><strong>color:</strong> Sets the text color.</li>
+                <li><strong>background-color:</strong> Sets the background color of an element.</li>
+                <li><strong>font-size:</strong> Specifies the size of the font.</li>
+                <li><strong>padding:</strong> Creates space inside an element's border.</li>
+                <li><strong>margin:</strong> Creates space outside an element.</li>
+                <li><strong>border:</strong> Allows you to set the border for an element.</li>
+            </ul>
+        </section>
+
+        <section id="common-uses">
+            <h2>Common Use Cases</h2>
+            <p>Understanding HTML and CSS tags/attributes is essential for web development. Here are some common uses:</p>
+            <ul>
+                <li>Creating a structured document for web pages.</li>
+                <li>Styling elements to improve appearance and user experience.</li>
+                <li>Responsive design using CSS media queries to adapt layouts across devices.</li>
+            </ul>
+        </section>
+        
+        <!-- Home button at the end -->
+        <div class="home-button">
+            <a href="myblogwebpage.html">Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Web Development Guide. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Interactive feature: Scroll to section
+        const links = document.querySelectorAll('nav a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href'); 
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
