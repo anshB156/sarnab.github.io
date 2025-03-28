@@ -68,7 +68,6 @@ window.addEventListener('load', () => {
         }, 500); // Match this duration with the CSS transition duration
     }, 5000); // 5 seconds
 });
-
 // Throttle function
 function throttle(func, limit) {
     let lastFunc;
