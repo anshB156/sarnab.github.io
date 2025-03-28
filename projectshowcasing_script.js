@@ -57,6 +57,17 @@ function animateParticles() {
 function viewProject(projectName) {
     alert(`You clicked on ${projectName}. Details will be available soon!`);
 }
+// Hide loader after 5 seconds
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Allow scrolling after loading
+        }, 500); // Match this duration with the CSS transition duration
+    }, 5000); // 5 seconds
+});
 
 // Throttle function
 function throttle(func, limit) {
