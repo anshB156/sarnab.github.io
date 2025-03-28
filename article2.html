@@ -63,14 +63,12 @@
             width: 100%;
         }
 
-        /* Add hover effect to list items */
         li:hover {
             background: #fcb69f;
             color: white;
             transition: all 0.3s ease;
         }
 
-        /* Add a box-shadow effect to sections */
         section {
             background: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -78,24 +76,44 @@
             border-radius: 8px;
         }
 
-        /* Add styling for the back-to-home link */
-        .btn {
-            display: block;
-            margin: 20px 0;
+        button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #3d405b;
+            border: none;
+            color: #FFFFFF;
             text-align: center;
+            font-size: 17px;
+            padding: 16px;
+            width: 130px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
         }
 
-        .btn a {
-            text-decoration: none;
-            color: #333;
-            background: #fcb69f;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+        button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
         }
 
-        .btn a:hover {
-            background: #ffecd2;
+        button span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -15px;
+            transition: 0.5s;
+        }
+
+        button:hover span {
+            padding-right: 15px;
+        }
+
+        button:hover span:after {
+            opacity: 1;
+            right: 0;
         }
     </style>
 </head>
@@ -109,7 +127,6 @@
             <h3>Introduction</h3>
             <p>Welcome to the ultimate guide on understanding the structure of a website! In this article, we'll explore how websites are built, how they function, and how you can create your own website without spending a dime.</p>
         </section>
-        
         <section id="how-websites-are-made">
             <h3>How Websites Are Made</h3>
             <p>Websites are composed of multiple components that work together seamlessly to deliver content and functionality to users. Here are the main parts:</p>
@@ -121,18 +138,16 @@
                 <li><strong>Hosting:</strong> The service that makes your website accessible on the internet.</li>
             </ul>
         </section>
-        
         <section id="how-websites-work">
             <h3>How Websites Work</h3>
             <p>When you enter a URL in your web browser, several steps occur to display the website:</p>
             <ol>
                 <li><strong>DNS Lookup:</strong> The browser finds the IP address associated with the domain name through a DNS lookup.</li>
                 <li><strong>HTTP Request:</strong> The browser sends an HTTP request to the server hosting the website.</li>
-                <li><strong>Server Response:</strong> The server processes the request and sends back the HTML, CSS, and JavaScript files.</li>
+                              <li><strong>Server Response:</strong> The server processes the request and sends back the HTML, CSS, and JavaScript files.</li>
                 <li><strong>Rendering:</strong> The browser parses the HTML, applies the CSS, and executes JavaScript to render the webpage.</li>
             </ol>
         </section>
-        
         <section id="build-your-own-website">
             <h3>How to Build Your Own Website with Zero Expenses</h3>
             <p>Building a website can be cost-effective or even free if you utilize the right resources. Here's a step-by-step guide:</p>
@@ -145,10 +160,14 @@
             </ol>
             <p>With these steps, you can have your own website up and running without any expense. Happy building!</p>
         </section>
-           <div class="btn">
-           <button class="btn" onclick="location.href='index.html'">Home</button>
-           </div>
-      
+        <!-- Desired button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="location.href='index.html'">
+                <span>Button</span>
+            </button>
+        </div>
     </main>
 </body>
 </html>
+
+               
