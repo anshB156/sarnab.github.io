@@ -1,0 +1,162 @@
+/*-----style_project#2.css------*/
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Arial', sans-serif;
+scroll-behavior: smooth;
+background-color: #1a1a1a;
+color: #ffffff;
+}
+/* Stylish Dropdown Navbar */
+.navbar {
+position: fixed;
+top: 0;
+width: 100%;
+background-color: rgba(0, 0, 0, 0.9);
+padding: 10px;
+z-index: 10;
+text-align: center;
+}
+.dropbtn {
+background-color: #ff4b4b;
+color: #ffffff;
+padding: 10px 20px;
+font-size: 1rem;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.dropbtn:hover {
+background-color: #ff6f6f;
+transform: scale(1.1);
+}
+.dropdown {
+position: relative;
+display: inline-block;
+}
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #333;
+box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+border-radius: 5px;
+}
+.dropdown-content a {
+color: #ff4b4b;
+padding: 10px 20px;
+text-decoration: none;
+display: block;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dropdown-content a:hover {
+background-color: #ff4b4b;
+color: #ffffff;
+}
+.dropdown:hover .dropdown-content {
+display: block;
+}
+/* Section Styling */
+section {
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+opacity: 0;
+transform: translateY(50px);
+transition: opacity 1s ease-out, transform 1s ease-out;
+}
+section.visible {
+opacity: 1;
+transform: translateY(0);
+}
+/* Landing Section */
+#landing {
+background: radial-gradient(circle at center, #ff0000, #1a1a1a);
+animation: background-fade 10s infinite alternate;
+}
+@keyframes background-fade {
+0% { background: radial-gradient(circle at center, #ff0000, #1a1a1a); }
+50% { background: radial-gradient(circle at center, #6e0b0b, #1a1a1a); }
+100% { background: radial-gradient(circle at center, #ff0000, #1a1a1a); }
+}
+#landing h1 {
+font-size: 4rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+0% { text-shadow: 0 0 10px #ff4b4b, 0 0 20px #ff4b4b; }
+100% { text-shadow: 0 0 20px #ff6f6f, 0 0 40px #ff6f6f; }
+}
+#landing button {
+margin-top: 20px;
+padding: 10px 30px;
+font-size: 1.2rem;
+color: #ffffff;
+background: #ff4b4b;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: transform 0.3s ease, background-color 0.3s ease;
+}
+#landing button:hover {
+background: #ff6f6f;
+transform: scale(1.1);
+}
+/* About Section */
+#about {
+background: #1a1a1a;
+}
+#about h2 {
+font-size: 3rem;
+color: #ff4b4b;
+}
+#about p {
+max-width: 600px;
+margin: 20px auto;
+font-size: 1.2rem;
+line-height: 1.8;
+}
+/* Contact Section */
+#contact {
+background: linear-gradient(to top right, #1a1a1a, #400000);
+}
+#contact h2 {
+font-size: 3rem;
+color: #ff4b4b;
+}
+#contact form {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+#contact input, #contact textarea {
+margin: 10px 0;
+padding: 10px;
+width: 300px;
+background: #2c2c2c;
+border: 1px solid #ff4b4b;
+color: #fff;
+border-radius: 5px;
+}
+#contact button {
+margin-top: 10px;
+padding: 10px 20px;
+font-size: 1rem;
+color: #ffffff;
+background-color: #ff4b4b;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: transform 0.3s ease, background-color 0.3s ease;
+}
+#contact button:hover {
+background-color: #ff6f6f;
+transform: scale(1.1);
+}
