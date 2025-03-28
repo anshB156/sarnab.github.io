@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    body {
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+    color: #ffffff;
+    overflow: hidden;
+    }
+    /* Particle Background */
+    #particle-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle, #1c1c1c, #000000);
+    }
+    /* Header Section */
+    header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    header h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    animation: fadeInDown 2s ease-in-out;
+    }
+    /* Project Showcase */
+    .project-showcase {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    }
+    .project-showcase h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ff4b4b;
+    }
+    .project-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    }
+    .project-card {
+    background: rgba(255, 75, 75, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    transform: scale(1);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    .project-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+    }
+    .project-card h3 {
+    margin-bottom: 10px;
+    }
+    .project-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    }
+    .project-card button {
+    background: #ffffff;
+    color: #ff4b4b;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+    .project-card button:hover {
+    background-color: #ff4b4b;
+    color: #ffffff;
+    }
+    /* Footer Section */
+    footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    }
