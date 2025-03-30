@@ -20,7 +20,7 @@
       overflow-x: hidden;
     }
 
-    /* Header - Ensure It Stays Above the Hero */
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -30,13 +30,12 @@
       position: fixed;
       width: 100%;
       top: 0;
-      z-index: 2000;  /* Increased to guarantee visibility */
+      z-index: 2000;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    header h1 {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #333;
+    /* Logo styling */
+    .logo img {
+      height: 50px;
     }
     nav {
       position: relative;
@@ -47,9 +46,8 @@
       background: none;
       border: none;
       color: #333;
-      font-size: 1.1em;
+      font-size: 1.5em;
       cursor: pointer;
-      margin: 0 15px;
       transition: color 0.3s ease, transform 0.2s ease;
     }
     nav .menu-button:hover { 
@@ -58,36 +56,43 @@
     nav .menu-button:active { 
       transform: scale(0.95); 
     }
-    .menu-button.clicked {
-      animation: buttonBounce 0.2s ease;
-    }
-    @keyframes buttonBounce {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 10%;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      flex-direction: column;
-    }
-    .dropdown-menu.active {
+    
+    /* Interactive Menu Overlay using transform */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      transform: translateX(100%);
+      z-index: 2100;
       display: flex;
+      flex-direction: column;
+      padding: 20px;
     }
-    .dropdown-menu a {
-      color: white;
-      padding: 8px 15px;
+    .menu-overlay.active {
+      transform: translateX(0);
+    }
+    .menu-overlay .close-menu {
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      align-self: flex-end;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .menu-overlay a {
       text-decoration: none;
-      transition: background 0.3s ease;
+      color: #333;
+      font-size: 1.2em;
+      margin: 10px 0;
+      transition: color 0.3s ease;
     }
-    .dropdown-menu a:hover {
-      background: rgba(255, 215, 0, 0.2);
+    .menu-overlay a:hover {
+      color: #FFD700;
     }
 
     /* Hero Section */
@@ -105,9 +110,9 @@
     .hero::after {
       content: '';
       position: absolute;
-      top: 0;
+      top: 0; 
       left: 0;
-      width: 100%;
+      width: 100%; 
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
     }
@@ -178,8 +183,10 @@
     .product-slider:hover {
       animation-play-state: paused;
     }
+    /* Each product set now contains exactly 10 cards and has a fixed width */
     .product-set {
       display: flex;
+      width: 2680px; /* 10 cards * 250px + 9 gaps * 20px = 2680px */
     }
     .product {
       background: white;
@@ -207,25 +214,43 @@
     .product:hover {
       transform: translateY(-5px);
     }
-    .product button {
-      background-color: #111;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 1em;
+    /* Custom Buy Now Button (replacing old Shop Now button) */
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 12px;
+      gap: 10px;
+      background-color: #181717;
+      outline: 3px #181717 solid;
+      outline-offset: -3px;
       border-radius: 5px;
+      border: none;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: 400ms;
     }
-    .product button:hover {
-      background-color: #FFD700;
-      color: black;
-      transform: scale(1.05);
+    .button .text {
+      color: white;
+      font-weight: 700;
+      font-size: 0.9em;
+      transition: 400ms;
     }
-    /* Animate exactly one product set width (3490px calculated from 13 cards at 250px each with 20px margin) */
+    .button svg path {
+      transition: 400ms;
+    }
+    .button:hover {
+      background-color: transparent;
+    }
+    .button:hover .text {
+      color: #181717;
+    }
+    .button:hover svg path {
+      fill: #181717;
+    }
+    /* Animate the product slider: move by one product set width (2680px) */
     @keyframes scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-3490px); }
+      100% { transform: translateX(-2680px); }
     }
 
     /* Footer */
@@ -277,7 +302,6 @@
       transform: scale(1.3);
       color: #FFD700;
     }
-    /* Additional bottom info in the footer */
     .footer-extra {
       display: flex;
       flex-wrap: wrap;
@@ -316,22 +340,28 @@
 </head>
 <body>
   <header>
-    <h1>T-Shirt Co.</h1>
+    <!-- Replace text with your logo PNG -->
+    <a href="#" class="logo">
+      <img src="logo.png" alt="T-Shirt Co. Logo" />
+    </a>
     <nav>
       <button type="button" class="menu-button">
-        <i class="fas fa-bars"></i> Menu
+        <i class="fas fa-bars"></i>
       </button>
-      <div class="dropdown-menu">
-        <a href="#">Home</a>
-        <a href="#">Shop</a>
-        <a href="#">Products</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Blog</a>
-        <a href="#">FAQ</a>
-      </div>
     </nav>
   </header>
+
+  <!-- Interactive Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay">
+    <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Products</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+  </div>
 
   <section class="hero">
     <div class="hero-content">
@@ -351,140 +381,143 @@
     <h2>Our Collection</h2>
     <div class="product-carousel">
       <div class="product-slider">
-        <!-- First Product Set -->
+        <!-- First Product Set (10 Cards) -->
         <div class="product-set">
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Classic Cotton Tee">
             <h3>Classic Cotton Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Eco-Friendly Tee">
             <h3>Eco-Friendly Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Performance Tee">
             <h3>Performance Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Vintage Tee">
             <h3>Vintage Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Graphic Tee">
             <h3>Graphic Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Limited Edition Tee">
             <h3>Limited Edition Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Summer Special Tee">
-            <h3>Summer Special Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Eco Sport Tee">
-            <h3>Eco Sport Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Urban Style Tee">
-            <h3>Urban Style Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Classic Black Tee">
-            <h3>Classic Black Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Modern Fit Tee">
-            <h3>Modern Fit Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Retro Tee">
-            <h3>Retro Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Luxury Tee">
-            <h3>Luxury Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
         </div>
         <!-- Second Product Set (Duplicate) -->
         <div class="product-set">
+          <!-- Duplicate the same 10 product cards -->
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Classic Cotton Tee">
             <h3>Classic Cotton Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Eco-Friendly Tee">
             <h3>Eco-Friendly Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Performance Tee">
             <h3>Performance Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Vintage Tee">
             <h3>Vintage Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Graphic Tee">
             <h3>Graphic Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
           <div class="product">
             <img src="https://via.placeholder.com/250" alt="Limited Edition Tee">
             <h3>Limited Edition Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Summer Special Tee">
-            <h3>Summer Special Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Eco Sport Tee">
-            <h3>Eco Sport Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Urban Style Tee">
-            <h3>Urban Style Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Classic Black Tee">
-            <h3>Classic Black Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Modern Fit Tee">
-            <h3>Modern Fit Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Retro Tee">
-            <h3>Retro Tee</h3>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/250" alt="Luxury Tee">
-            <h3>Luxury Tee</h3>
-            <button>Shop Now</button>
+            <button class="button">
+              <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
+              </svg>
+              <p class="text">Buy Now</p>
+            </button>
           </div>
         </div>
       </div>
@@ -502,7 +535,6 @@
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
-      <!-- Extra Footer Information: Additional Links -->
       <div class="footer-extra">
         <a href="#">Contact Us</a>
         <a href="#">About Us</a>
@@ -515,12 +547,16 @@
   </footer>
 
   <script>
-    // Toggle Dropdown on Menu Button Click
+    // Toggle the interactive menu overlay
     const menuButton = document.querySelector('.menu-button');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+
     menuButton.addEventListener('click', () => {
-      menuButton.classList.toggle('clicked');
-      dropdownMenu.classList.toggle('active');
+      menuOverlay.classList.add('active');
+    });
+    closeMenu.addEventListener('click', () => {
+      menuOverlay.classList.remove('active');
     });
   </script>
 </body>
