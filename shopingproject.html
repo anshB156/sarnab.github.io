@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Shirt Co.</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: indigo;
+      font-size: 1.1em;
+    }
+
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px;
+      background: url('https://via.placeholder.com/1200x600') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    .hero button {
+      background-color: indigo;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      cursor: pointer;
+      font-size: 1.2em;
+      border-radius: 25px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .value-props {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      padding: 50px 0;
+    }
+
+    .value-props div {
+      text-align: center;
+      max-width: 250px;
+    }
+
+    .history, .products {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .history h2, .products h2 {
+      font-size: 2.5em;
+      color: indigo;
+      margin-bottom: 20px;
+    }
+
+    .products .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .products .product {
+      border: 1px solid #ddd;
+      padding: 30px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .products .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .products img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .products button {
+      background-color: indigo;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      cursor: pointer;
+      font-size: 1em;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .products button:hover {
+      background-color: #4b0082;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+
+    footer a {
+      color: indigo;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .value-props {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div>
+      <h1>T-Shirt Co.</h1>
+    </div>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-content">
+      <h1>Quality T-Shirts for Everyone</h1>
+      <p>Your one-stop shop for premium, sustainable, and stylish t-shirts.</p>
+      <button>Shop Collection</button>
+    </div>
+  </section>
+
+  <section class="value-props container">
+    <div>
+      <h3>Premium Quality</h3>
+      <p>Top-notch materials for ultimate comfort.</p>
+    </div>
+    <div>
+      <h3>Sustainable</h3>
+      <p>Environmentally responsible production.</p>
+    </div>
+    <div>
+      <h3>Fast Shipping</h3>
+      <p>Get your t-shirts quickly and hassle-free.</p>
+    </div>
+  </section>
+
+  <section class="history container">
+    <h2>Our History</h2>
+    <p>
+      Since our founding in 2010, T-Shirt Co. has been dedicated to crafting high-quality, stylish, and sustainable t-shirts. From humble beginnings to a global presence, our journey has been driven by a passion for comfort and innovation.
+    </p>
+  </section>
+
+  <section class="products container">
+    <h2>Our Collection</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="tshirt1.jpg" alt="Classic Cotton Tee">
+        <h3>Classic Cotton Tee</h3>
+        <p>Soft, breathable, and perfect for everyday wear.</p>
+        <button>Shop Now</button>
+      </div>
+      <div class="product">
+        <img src="tshirt2.jpg" alt="Eco-Friendly Tee">
+        <h3>Eco-Friendly Tee</h3>
+        <p>Made from 100% organic materials for a greener tomorrow.</p>
+        <button>Shop Now</button>
+      </div>
+      <div class="product">
+        <img src="tshirt3.jpg" alt="Performance Tee">
+        <h3>Performance Tee</h3>
+        <p>Moisture-wicking and designed for active lifestyles.</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">
+    <p>&copy; 2025 T-Shirt Co. | Follow us on 
+      <a href="#">Instagram</a>, <a href="#">Facebook</a>, 
+      and <a href="#">Twitter</a>.
+    </p>
+    <p>Contact: info@tshirtco.com</p>
+  </footer>
+</body>
+</html>
