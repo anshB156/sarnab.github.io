@@ -136,6 +136,7 @@
       margin-bottom: 15px;
     }
 
+    /* Button Animation */
     .products button {
       background-color: indigo;
       color: white;
@@ -144,11 +145,18 @@
       cursor: pointer;
       font-size: 1em;
       border-radius: 5px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .products button:hover {
       background-color: #4b0082;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
+    }
+
+    .products button:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 10px rgba(75, 0, 130, 0.3);
     }
 
     footer {
@@ -197,28 +205,6 @@
     </div>
   </section>
 
-  <section class="value-props container">
-    <div>
-      <h3>Premium Quality</h3>
-      <p>Top-notch materials for ultimate comfort.</p>
-    </div>
-    <div>
-      <h3>Sustainable</h3>
-      <p>Environmentally responsible production.</p>
-    </div>
-    <div>
-      <h3>Fast Shipping</h3>
-      <p>Get your t-shirts quickly and hassle-free.</p>
-    </div>
-  </section>
-
-  <section class="history container">
-    <h2>Our History</h2>
-    <p>
-      Since our founding in 2010, T-Shirt Co. has been dedicated to crafting high-quality, stylish, and sustainable t-shirts. From humble beginnings to a global presence, our journey has been driven by a passion for comfort and innovation.
-    </p>
-  </section>
-
   <section class="products container">
     <h2>Our Collection</h2>
     <div class="product-grid">
@@ -248,6 +234,7 @@
       <a href="#">Instagram</a>, <a href="#">Facebook</a>, 
       and <a href="#">Twitter</a>.
     </p>
+    <p>Sign up for our <a href="#">newsletter</a>!</p>
     <p>Contact: info@tshirtco.com</p>
   </footer>
 </body>
