@@ -1,47 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T-Shirt Co.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-Shirt Co. - Stunning E-Commerce</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
+    /* Global Styles */
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
-      color: #333333;
-      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
+    /* Header - Ensure It Stays Above the Hero */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      border-bottom: 1px solid #ddd;
+      padding: 20px 10%;
+      background: rgba(255, 255, 255, 0.9);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 2000;  /* Increased to guarantee visibility */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: indigo;
-      font-size: 1.1em;
+    header h1 {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #333;
     }
-
-    .hero {
+    nav {
       position: relative;
-      text-align: center;
-      padding: 100px 20px;
-      background: url('https://via.placeholder.com/1200x600') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
+    nav .menu-button {
+      background: none;
+      border: none;
+      color: #333;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin: 0 15px;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    nav .menu-button:hover { 
+      color: #FFD700; 
+    }
+    nav .menu-button:active { 
+      transform: scale(0.95); 
+    }
+    .menu-button.clicked {
+      animation: buttonBounce 0.2s ease;
+    }
+    @keyframes buttonBounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 10%;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      flex-direction: column;
+    }
+    .dropdown-menu.active {
+      display: flex;
+    }
+    .dropdown-menu a {
+      color: white;
+      padding: 8px 15px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255, 215, 0, 0.2);
     }
 
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      background: url('https://via.placeholder.com/1500x800') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
     .hero::after {
       content: '';
       position: absolute;
@@ -49,193 +109,419 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
-      z-index: 1;
+      background: rgba(0, 0, 0, 0.5);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
-      color: white;
+      animation: fadeIn 2s ease-in-out;
     }
-
     .hero h1 {
       font-size: 3.5em;
       font-weight: bold;
-      margin-bottom: 20px;
+      animation: floating 3s infinite ease-in-out;
     }
-
     .hero p {
       font-size: 1.5em;
       margin-bottom: 30px;
+      animation: fadeInUp 1.5s ease-in-out;
     }
-
     .hero button {
-      background-color: indigo;
-      color: white;
+      background-color: #FFD700;
+      color: black;
       border: none;
       padding: 15px 40px;
-      cursor: pointer;
       font-size: 1.2em;
       border-radius: 25px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: bounce 2s infinite;
     }
-
     .hero button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(255,215,0,0.5);
     }
-
-    .value-props {
+    
+    /* Products Section */
+    .products {
+      padding: 80px 10%;
+      text-align: center;
+      background: white;
+      overflow: hidden;
+      min-height: 100vh;
       display: flex;
-      justify-content: space-around;
-      gap: 20px;
-      padding: 50px 0;
+      flex-direction: column;
+      justify-content: center;
     }
-
-    .value-props div {
-      text-align: center;
-      max-width: 250px;
+    .products-intro {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #555;
+      padding: 0 20px;
     }
-
-    .history, .products {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .history h2, .products h2 {
+    .products h2 {
       font-size: 2.5em;
-      color: indigo;
+      color: #111;
       margin-bottom: 20px;
     }
-
-    .products .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
+    .product-carousel {
+      overflow: hidden;
+      position: relative;
     }
-
-    .products .product {
-      border: 1px solid #ddd;
-      padding: 30px;
+    .product-slider {
+      display: flex;
+      animation: scroll 40s linear infinite;
+      will-change: transform;
+    }
+    .product-slider:hover {
+      animation-play-state: paused;
+    }
+    .product-set {
+      display: flex;
+    }
+    .product {
+      background: white;
+      padding: 20px;
       border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      width: 250px;
+      margin-right: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-
-    .products .product:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    .product-set .product:last-child {
+      margin-right: 0;
     }
-
-    .products img {
+    .product img {
       width: 100%;
       height: auto;
       border-radius: 10px;
-      margin-bottom: 15px;
+      transition: transform 0.3s ease;
     }
-
-    /* Button Animation */
-    .products button {
-      background-color: indigo;
+    .product:hover img {
+      transform: scale(1.05);
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product button {
+      background-color: #111;
       color: white;
       border: none;
-      padding: 10px 30px;
-      cursor: pointer;
+      padding: 12px 30px;
       font-size: 1em;
       border-radius: 5px;
-      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
-
-    .products button:hover {
-      background-color: #4b0082;
+    .product button:hover {
+      background-color: #FFD700;
+      color: black;
       transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
+    }
+    /* Animate exactly one product set width (3490px calculated from 13 cards at 250px each with 20px margin) */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-3490px); }
     }
 
-    .products button:active {
-      transform: scale(0.95);
-      box-shadow: 0 2px 10px rgba(75, 0, 130, 0.3);
-    }
-
-    footer {
+    /* Footer */
+    .footer {
+      background: linear-gradient(45deg, #111, #333);
+      color: white;
+      padding: 60px 10%;
       text-align: center;
-      padding: 40px 20px;
-      background-color: #f9f9f9;
-      border-top: 1px solid #ddd;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInFooter 2s ease forwards;
     }
-
-    footer a {
-      color: indigo;
+    .footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+    .footer-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer-logo h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin: 0;
+      animation: slideIn 1.5s ease-out;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 20px 0;
+    }
+    .footer-links a {
+      color: white;
+      font-size: 2em;
+      transition: transform 0.3s ease, color 0.3s ease;
       text-decoration: none;
-      margin: 0 10px;
     }
-
-    footer a:hover {
-      text-decoration: underline;
+    .footer-links a:hover {
+      transform: scale(1.3);
+      color: #FFD700;
     }
-
-    @media (max-width: 768px) {
-      .value-props {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-      }
+    /* Additional bottom info in the footer */
+    .footer-extra {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      font-size: 0.9em;
+      margin-top: 20px;
+    }
+    .footer-extra a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-extra a:hover {
+      color: #FFD700;
+    }
+    .footer-copy {
+      font-size: 0.9em;
+      opacity: 0.7;
+      margin-top: 20px;
+      animation: fadeInText 2s ease;
+    }
+    @keyframes fadeInFooter {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInText {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <header class="container">
-    <div>
-      <h1>T-Shirt Co.</h1>
-    </div>
+  <header>
+    <h1>T-Shirt Co.</h1>
     <nav>
-      <a href="#shop">Shop</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <button type="button" class="menu-button">
+        <i class="fas fa-bars"></i> Menu
+      </button>
+      <div class="dropdown-menu">
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Products</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Blog</a>
+        <a href="#">FAQ</a>
+      </div>
     </nav>
   </header>
 
-  <section class="hero container">
+  <section class="hero">
     <div class="hero-content">
       <h1>Quality T-Shirts for Everyone</h1>
-      <p>Your one-stop shop for premium, sustainable, and stylish t-shirts.</p>
+      <p>Premium, sustainable, and stylish t-shirts for all.</p>
       <button>Shop Collection</button>
     </div>
   </section>
 
-  <section class="products container">
+  <section class="products">
+    <div class="products-intro">
+      <p>
+        Discover our premium collection where every t-shirt tells a story of exceptional craftsmanship, sustainable practices, and innovative design.
+        Our garments are meticulously crafted with attention to detail, ensuring comfort, durability, and style.
+      </p>
+    </div>
     <h2>Our Collection</h2>
-    <div class="product-grid">
-      <div class="product">
-        <img src="1743320364602.jpg" alt="Classic Cotton Tee">
-        <h3>Classic Cotton Tee</h3>
-        <p>Soft, breathable, and perfect for everyday wear.</p>
-        <button>Shop Now</button>
-      </div>
-      <div class="product">
-        <img src="1743320388487.jpg" alt="Eco-Friendly Tee">
-        <h3>Eco-Friendly Tee</h3>
-        <p>Made from 100% organic materials for a greener tomorrow.</p>
-        <button>Shop Now</button>
-      </div>
-      <div class="product">
-        <img src="1743320525269.jpg" alt="Performance Tee">
-        <h3>Performance Tee</h3>
-        <p>Moisture-wicking and designed for active lifestyles.</p>
-        <button>Shop Now</button>
+    <div class="product-carousel">
+      <div class="product-slider">
+        <!-- First Product Set -->
+        <div class="product-set">
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Classic Cotton Tee">
+            <h3>Classic Cotton Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Eco-Friendly Tee">
+            <h3>Eco-Friendly Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Performance Tee">
+            <h3>Performance Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Vintage Tee">
+            <h3>Vintage Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Graphic Tee">
+            <h3>Graphic Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Limited Edition Tee">
+            <h3>Limited Edition Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Summer Special Tee">
+            <h3>Summer Special Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Eco Sport Tee">
+            <h3>Eco Sport Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Urban Style Tee">
+            <h3>Urban Style Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Classic Black Tee">
+            <h3>Classic Black Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Modern Fit Tee">
+            <h3>Modern Fit Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Retro Tee">
+            <h3>Retro Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Luxury Tee">
+            <h3>Luxury Tee</h3>
+            <button>Shop Now</button>
+          </div>
+        </div>
+        <!-- Second Product Set (Duplicate) -->
+        <div class="product-set">
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Classic Cotton Tee">
+            <h3>Classic Cotton Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Eco-Friendly Tee">
+            <h3>Eco-Friendly Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Performance Tee">
+            <h3>Performance Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Vintage Tee">
+            <h3>Vintage Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Graphic Tee">
+            <h3>Graphic Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Limited Edition Tee">
+            <h3>Limited Edition Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Summer Special Tee">
+            <h3>Summer Special Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Eco Sport Tee">
+            <h3>Eco Sport Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Urban Style Tee">
+            <h3>Urban Style Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Classic Black Tee">
+            <h3>Classic Black Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Modern Fit Tee">
+            <h3>Modern Fit Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Retro Tee">
+            <h3>Retro Tee</h3>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/250" alt="Luxury Tee">
+            <h3>Luxury Tee</h3>
+            <button>Shop Now</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="container">
-    <p>&copy; 2025 T-Shirt Co. | Follow us on 
-      <a href="#">Instagram</a>, <a href="#">Facebook</a>, 
-      and <a href="#">Twitter</a>.
-    </p>
-    <p>Sign up for our <a href="#">newsletter</a>!</p>
-    <p>Contact: info@tshirtco.com</p>
+  <!-- Footer Section with Additional Info -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>T-Shirt Co.</h2>
+      </div>
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+      <!-- Extra Footer Information: Additional Links -->
+      <div class="footer-extra">
+        <a href="#">Contact Us</a>
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Help & Support</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 T-Shirt Co. All Rights Reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    // Toggle Dropdown on Menu Button Click
+    const menuButton = document.querySelector('.menu-button');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    menuButton.addEventListener('click', () => {
+      menuButton.classList.toggle('clicked');
+      dropdownMenu.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
