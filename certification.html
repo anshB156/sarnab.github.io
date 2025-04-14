@@ -10,7 +10,7 @@
   <!-- AOS CSS for scroll animations -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
 
-  <title>My Certificates Gallery</title>
+  <title>My Certificates & Skills</title>
 
   <style>
     :root {
@@ -29,9 +29,6 @@
       color: var(--text-light);
       transition: background 0.3s, color 0.3s;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 2rem;
     }
     body.dark {
@@ -41,14 +38,14 @@
     header {
       width: 100%;
       max-width: 1000px;
+      margin: 0 auto 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
     }
     h1 { font-weight: 700; font-size: 2rem; }
 
-    /* custom toggle from Uiverse.io */
+    /* Custom Toggle Switch  */
     .l {
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 0.75em;
@@ -62,46 +59,31 @@
       transition:
         background-color 0.1s 0.3s ease-out,
         box-shadow 0.1s 0.3s ease-out;
-      -webkit-appearance: none;
-      -moz-appearance: none;
       appearance: none;
       cursor: pointer;
     }
-    .l:before,
-    .l:after {
-      content: "";
-      display: block;
-    }
+    .l:before, .l:after { content: ""; display: block; }
     .l:before {
       background-color: #d7d7d7;
       border-radius: 50%;
-      width: 1.2em;
-      height: 1.2em;
-      transition:
-        background-color 0.1s 0.3s ease-out,
-        transform 0.3s ease-out;
+      width: 1.2em; height: 1.2em;
+      transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
       z-index: 1;
     }
     .l:after {
       background:
         linear-gradient(transparent 50%, rgba(0, 0, 0, 0.15) 0) 0 50% / 50% 100%,
-        repeating-linear-gradient(90deg, #bbb 0, #bbb, #bbb 20%, #999 20%, #999 40%)
-          0 50% / 50% 100%,
+        repeating-linear-gradient(90deg, #bbb 0, #bbb 20%, #999 20%, #999 40%) 0 50% / 50% 100%,
         radial-gradient(circle at 50% 50%, #888 25%, transparent 26%);
       background-repeat: no-repeat;
       border: 0.25em solid transparent;
       border-left: 0.4em solid #d8d8d8;
-      border-right: 0 solid transparent;
-      transition:
-        border-left-color 0.1s 0.3s ease-out,
-        transform 0.3s ease-out;
       transform: translateX(-22.5%);
       transform-origin: 25% 50%;
-      width: 1.2em;
-      height: 1em;
+      width: 1.2em; height: 1em;
+      transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
       box-sizing: border-box;
     }
-    /* Checked State */
     .l:checked {
       background-color: rgba(0, 0, 0, 0.45);
       box-shadow: 0.125em 0.125em 0 0.125em rgba(0, 0, 0, 0.1) inset;
@@ -116,13 +98,63 @@
     }
     .l:focus { outline: 0; }
 
-    /* Grid Gallery */
+    /* Skills Section */
+    .skills-section {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+    }
+    .skills-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      position: relative;
+      background: var(--card-light);
+      border-radius: 8px;
+      padding: 1.2rem 1rem 1rem;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    body.dark .skill-card {
+      background: var(--card-dark);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40px; height: 4px;
+      background: var(--accent);
+      border-radius: 0 0 4px 4px;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .skill-name {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Certificates Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       width: 100%;
       max-width: 1000px;
+      margin: 0 auto;
     }
     .card {
       background: var(--card-light);
@@ -193,23 +225,100 @@
 <body>
 
   <header>
-    <h1 data-aos="fade-down">My Certifications</h1>
-    <!-- custom switch -->
+    <h1 data-aos="fade-down">My Skills & Certifications</h1>
     <input class="l" type="checkbox" id="modeToggle" title="Toggle dark/light mode"/>
   </header>
 
+  <!-- Skills Section -->
+  <section class="skills-section">
+    <h2 data-aos="fade-up">My Skills</h2>
+    <div class="skills-grid">
+      <!-- my skill cards -->
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="50">
+        <div class="skill-name">User-Centered Design</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+        <div class="skill-name">UX Research</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="150">
+        <div class="skill-name">Empathy Development</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+        <div class="skill-name">Defining User Needs</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="250">
+        <div class="skill-name">Ideation</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
+        <div class="skill-name">Information Architecture</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="350">
+        <div class="skill-name">Wireframing</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
+        <div class="skill-name">Prototyping</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="450">
+        <div class="skill-name">Usability Testing</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="500">
+        <div class="skill-name">Iteration</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="550">
+        <div class="skill-name">Accessibility</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="600">
+        <div class="skill-name">Equity-Focused Design</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="650">
+        <div class="skill-name">Figma Proficiency</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="700">
+        <div class="skill-name">Portfolio Development</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="750">
+        <div class="skill-name">Responsive Web Design</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="800">
+        <div class="skill-name">Presentation Skills</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="850">
+        <div class="skill-name">Understanding the UX Design Field</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="900">
+        <div class="skill-name">Job Readiness</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="950">
+        <div class="skill-name">Utilizing AI in UX Design</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="1000">
+        <div class="skill-name">HTML</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="1050">
+        <div class="skill-name">CSS</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="1100">
+        <div class="skill-name">Java (Basic)</div>
+      </div>
+      <div class="skill-card" data-aos="flip-left" data-aos-delay="1150">
+        <div class="skill-name">AI Prompting</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Gallery -->
   <section class="gallery">
     <div class="card" data-aos="zoom-in" onclick="openModal(this)">
       <img src="certificate.png" alt="Certificate 1"/>
-      <div class="caption">My First</div>
+      <div class="caption">My First Certification</div>
     </div>
     <div class="card" data-aos="zoom-in" data-aos-delay="100" onclick="openModal(this)">
       <img src="Courseragoogle.jpg" alt="Certificate 2"/>
-      <div class="caption">My Second</div>
+      <div class="caption">My Second Certification</div>
     </div>
     <div class="card" data-aos="zoom-in" data-aos-delay="200" onclick="openModal(this)">
       <img src="Courseraleed.jpg" alt="Certificate 3"/>
-      <div class="caption">My third</div>
+      <div class="caption">My Third Certification</div>
     </div>
   </section>
 
@@ -222,39 +331,28 @@
     </div>
   </div>
 
-  <!-- AOS JS for scroll animations -->
+  <!-- AOS JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
 
-    //checkbox to toggle dark mode
-    const chk = document.getElementById('modeToggle');
-    chk.addEventListener('change', () => {
-      document.body.classList.toggle('dark', chk.checked);
-    });
+    // Dark/Light Mode Toggle
+    document.getElementById('modeToggle')
+      .addEventListener('change', e => {
+        document.body.classList.toggle('dark', e.target.checked);
+      });
 
-    // Lightbox
+    // Certificate Lightbox
     function openModal(card) {
-      const img = card.querySelector('img').src;
-      const cap = card.querySelector('.caption').textContent;
-      document.getElementById('lightboxImg').src = img;
-      document.getElementById('lightboxCaption').textContent = cap;
+      document.getElementById('lightboxImg').src = card.querySelector('img').src;
+      document.getElementById('lightboxCaption').textContent = card.querySelector('.caption').textContent;
       document.getElementById('lightbox').classList.add('open');
     }
     function closeModal() {
       document.getElementById('lightbox').classList.remove('open');
     }
-    document.getElementById('lightbox').addEventListener('click', e => {
-      if (e.target === e.currentTarget) closeModal();
-    });
+    document.getElementById('lightbox')
+      .addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
