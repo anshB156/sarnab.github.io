@@ -1,24 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="certifi_styles.css">
-    <title>Certification Section</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- AOS CSS for scroll animations -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+
+  <title>My Certificates Gallery</title>
+
+  <style>
+    :root {
+      --bg-light: #f0f4f8;
+      --bg-dark: #1a1f2b;
+      --card-light: #ffffff;
+      --card-dark: #2a2f3f;
+      --text-light: #333;
+      --text-dark: #eee;
+      --accent: #ff7e5f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    header {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    h1 { font-weight: 700; font-size: 2rem; }
+
+    /* custom toggle from Uiverse.io */
+    .l {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 0.75em;
+      box-shadow: 0.125em 0.125em 0 0.125em rgba(0, 0, 0, 0.3) inset;
+      color: #fdea7b;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15em;
+      width: 3em;
+      height: 1.5em;
+      transition:
+        background-color 0.1s 0.3s ease-out,
+        box-shadow 0.1s 0.3s ease-out;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+    .l:before,
+    .l:after {
+      content: "";
+      display: block;
+    }
+    .l:before {
+      background-color: #d7d7d7;
+      border-radius: 50%;
+      width: 1.2em;
+      height: 1.2em;
+      transition:
+        background-color 0.1s 0.3s ease-out,
+        transform 0.3s ease-out;
+      z-index: 1;
+    }
+    .l:after {
+      background:
+        linear-gradient(transparent 50%, rgba(0, 0, 0, 0.15) 0) 0 50% / 50% 100%,
+        repeating-linear-gradient(90deg, #bbb 0, #bbb, #bbb 20%, #999 20%, #999 40%)
+          0 50% / 50% 100%,
+        radial-gradient(circle at 50% 50%, #888 25%, transparent 26%);
+      background-repeat: no-repeat;
+      border: 0.25em solid transparent;
+      border-left: 0.4em solid #d8d8d8;
+      border-right: 0 solid transparent;
+      transition:
+        border-left-color 0.1s 0.3s ease-out,
+        transform 0.3s ease-out;
+      transform: translateX(-22.5%);
+      transform-origin: 25% 50%;
+      width: 1.2em;
+      height: 1em;
+      box-sizing: border-box;
+    }
+    /* Checked State */
+    .l:checked {
+      background-color: rgba(0, 0, 0, 0.45);
+      box-shadow: 0.125em 0.125em 0 0.125em rgba(0, 0, 0, 0.1) inset;
+    }
+    .l:checked:before {
+      background-color: currentColor;
+      transform: translateX(125%);
+    }
+    .l:checked:after {
+      border-left-color: currentColor;
+      transform: translateX(-2.5%) rotateY(180deg);
+    }
+    .l:focus { outline: 0; }
+
+    /* Grid Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+    .card {
+      background: var(--card-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    body.dark .card {
+      background: var(--card-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .caption {
+      padding: 1rem;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+    body.dark .caption {
+      color: var(--text-dark);
+    }
+
+    /* Modal Lightbox */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal.open { display: flex; }
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    .modal-content img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .modal-close {
+      position: absolute;
+      top: -10px; right: -10px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <div class="image-container">
-      <img src="certificate.png" class="centered-image">
-      <div class="image-text"><i>This marks the official achievement of my very first certificate—a small but significant milestone in my life</i></div>
+
+  <header>
+    <h1 data-aos="fade-down">🎓 My Certificates</h1>
+    <!-- custom switch -->
+    <input class="l" type="checkbox" id="modeToggle" title="Toggle dark/light mode"/>
+  </header>
+
+  <section class="gallery">
+    <div class="card" data-aos="zoom-in" onclick="openModal(this)">
+      <img src="certificate.png" alt="Certificate 1"/>
+      <div class="caption">This marks the official achievement of my very first certificate—a small but significant milestone in my life.</div>
     </div>
-    <div class="image-container">
-      <img src="Courseragoogle.jpg" class="centered-image">
-      <div class="image-text"><i>This marks the official achievement of my second certificate and also significant milestone in my life</i></div>
+    <div class="card" data-aos="zoom-in" data-aos-delay="100" onclick="openModal(this)">
+      <img src="Courseragoogle.jpg" alt="Certificate 2"/>
+      <div class="caption">Proud to have completed my second certificate—another step forward in my learning journey.</div>
     </div>
-    <div class="image-container">
-      <img src="Courseraleed.jpg" class="centered-image">
-      <div class="image-text"><i>This marks the official achievement of my second certificate and also significant milestone in my life</i></div>
+    <div class="card" data-aos="zoom-in" data-aos-delay="200" onclick="openModal(this)">
+      <img src="Courseraleed.jpg" alt="Certificate 3"/>
+      <div class="caption">Celebrating my third certificate—continuing to build skills and confidence.</div>
     </div>
+  </section>
+
+  <!-- Modal Lightbox -->
+  <div class="modal" id="lightbox">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <img src="" alt="Enlarged Certificate" id="lightboxImg"/>
+      <div class="caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- AOS JS for scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    //checkbox to toggle dark mode
+    const chk = document.getElementById('modeToggle');
+    chk.addEventListener('change', () => {
+      document.body.classList.toggle('dark', chk.checked);
+    });
+
+    // Lightbox
+    function openModal(card) {
+      const img = card.querySelector('img').src;
+      const cap = card.querySelector('.caption').textContent;
+      document.getElementById('lightboxImg').src = img;
+      document.getElementById('lightboxCaption').textContent = cap;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+  </script>
 </body>
 </html>
 
