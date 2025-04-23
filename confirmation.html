@@ -29,7 +29,7 @@
   </div>
 
   <script>
-    // Read URL params
+   
     const params = new URLSearchParams(location.search);
     const name = params.get('name') || '—';
     const price = params.get('price') || '0.00';
@@ -40,7 +40,7 @@
       window.location.href = 'product_list.html';
     };
     document.getElementById('confirmBtn').onclick = () => {
-      // Pass through to checkout
+      
       window.location.href = 
         `checkout.html?name=${encodeURIComponent(name)}&price=${price}`;
     };
