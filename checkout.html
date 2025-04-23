@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+
+    <div class="summary">
+      <h2>Your Order</h2>
+      <p><strong>Item:</strong> <span id="c-item-name"></span></p>
+      <p><strong>Total:</strong> $<span id="c-item-price"></span></p>
+    </div>
+
+    <div class="payment-methods">
+      <h2>Select Payment Method</h2>
+      <label><input type="radio" name="pay" value="GPay" checked> Google Pay</label>
+      <label><input type="radio" name="pay" value="PayPal"> PayPal</label>
+      <label><input type="radio" name="pay" value="MasterCard"> MasterCard</label>
+    </div>
+
+    <div class="note">
+      🔒 Your payment details are encrypted and never sold to third parties.
+    </div>
+
+    <div style="text-align:center;">
+      <button class="btn" id="payNow">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h2>Payment Successful!</h2>
+      <p>Thank you for your purchase.</p>
+      <button class="btn" id="continueBtn">Continue Shopping</button>
+    </div>
+  </div>
+
+  <script>
+    // Populate order summary
+    const p = new URLSearchParams(location.search);
+    document.getElementById('c-item-name').textContent = p.get('name') || '—';
+    document.getElementById('c-item-price').textContent = p.get('price') || '0.00';
+
+    // Pay Now handler
+    document.getElementById('payNow').onclick = () => {
+      document.getElementById('modal').style.display = 'flex';
+    };
+    document.getElementById('continueBtn').onclick = () => {
+      window.location.href = 'product_list.html';
+    };
+  </script>
+</body>
+</html>
