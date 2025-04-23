@@ -1,189 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Education</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #1a1f36;
-      --line: #dfe3e8;
-      --bg: #ffffff;
-      --text: #2e3243;
-      --sub: #6b6f85;
-      --button-bg: rgba(26, 31, 54, 0.1);
-      --button-hover: rgba(26, 31, 54, 0.2);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f4f6f8;
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .back-btn {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      display: flex;
-      align-items: center;
-      background: var(--button-bg);
-      border: none;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      font-family: inherit;
-      color: var(--accent);
-      z-index: 10;
-    }
-    .back-btn:hover {
-      background: var(--button-hover);
-      transform: translateX(-3px);
-    }
-    .back-btn svg {
-      width: 1rem;
-      height: 1rem;
-      margin-right: 0.5rem;
-      fill: var(--accent);
-      transform: scaleX(-1);
-    }
-    .edu-section {
-      max-width: 900px;
-      margin: 5rem auto 2rem;
-      padding: 0 1rem;
-    }
-    .edu-section h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 3rem;
-    }
-    .timeline {
-      position: relative;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 100%;
-      background: var(--line);
-    }
-    .card {
-      position: relative;
-      width: calc(50% - 2rem);
-      background: var(--bg);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-      opacity: 0;
-      transform: translateY(40px) rotateX(10deg);
-      transition: transform 0.6s ease, opacity 0.6s ease;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0) rotateX(0);
-    }
-    .card:nth-child(odd) {
-      float: left;
-      clear: both;
-      margin-right: 4%;
-      text-align: right;
-    }
-    .card:nth-child(even) {
-      float: right;
-      clear: both;
-      margin-left: 4%;
-      text-align: left;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 1.5rem;
-      width: 14px; height: 14px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px var(--bg);
-    }
-    .card:nth-child(odd)::before { right: -7px; }
-    .card:nth-child(even)::before { left: -7px; }
-    .card .duration {
-      font-size: 0.85rem;
-      color: var(--sub);
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.25rem;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .card p.degree {
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    .card p.details {
-      font-size: 0.9rem;
-      color: var(--sub);
-    }
-    .card:hover {
-      transform: perspective(600px) translateY(-5px) rotateX(5deg);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-    @media (max-width: 768px) {
-      .card, .card:nth-child(odd), .card:nth-child(even) {
-        float: none;
-        margin: 1.5rem auto;
-        width: 100%;
-        text-align: left;
-      }
-      .timeline::before { left: 1rem; }
-      .card::before { left: 1rem; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #1a1f36;
+            --line: #dfe3e8;
+            --bg: #ffffff;
+            --text: #2e3243;
+            --sub: #6b6f85;
+            --button-bg: rgba(26, 31, 54, 0.1);
+            --button-hover: rgba(26, 31, 54, 0.2);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f6f8;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            background: var(--button-bg);
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-family: inherit;
+            color: var(--accent);
+            z-index: 10;
+        }
+        .back-btn:hover {
+            background: var(--button-hover);
+            transform: translateX(-3px);
+        }
+        .back-btn svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            fill: var(--accent);
+            transform: scaleX(-1);
+        }
+        .edu-section {
+            max-width: 900px;
+            margin: 5rem auto 2rem;
+            padding: 0 1rem;
+        }
+        .edu-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 3rem;
+        }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--line);
+        }
+        .card {
+            position: relative;
+            width: calc(50% - 2rem);
+            background: var(--bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(40px) rotateX(10deg);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        .card:nth-child(odd) {
+            float: left;
+            clear: both;
+            margin-right: 4%;
+            text-align: right;
+        }
+        .card:nth-child(even) {
+            float: right;
+            clear: both;
+            margin-left: 4%;
+            text-align: left;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            width: 14px; height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg);
+        }
+        .card:nth-child(odd)::before { right: -7px; }
+        .card:nth-child(even)::before { left: -7px; }
+        .card .duration {
+            font-size: 0.85rem;
+            color: var(--sub);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .card p.degree {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .card p.details {
+            font-size: 0.9rem;
+            color: var(--sub);
+        }
+        .card:hover {
+            transform: perspective(600px) translateY(-5px) rotateX(5deg);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        @media (max-width: 768px) {
+            .card, .card:nth-child(odd), .card:nth-child(even) {
+                float: none;
+                margin: 1.5rem auto;
+                width: 100%;
+                text-align: left;
+            }
+            .timeline::before { left: 1rem; }
+            .card::before { left: 1rem; }
+        }
+    </style>
 </head>
 <body>
- <button class="back-btn" onclick="window.location.href='potfolioindex.html'">Back</button>
-  <section class="edu-section">
-    <h2>Education</h2>
-    <div class="timeline">
-      <div class="card">
-        <div class="duration">∞</div>
-        <h3>University</h3>
-        <p class="degree">Have'nt done yet.</p>
-        <p class="details">Have'nt yet.</p>
-      </div>
-      <div class="card">
-        <div class="duration">Currently Studying</div>
-        <h3>Kazem Ali School And College</h3>
-        <p class="degree">Higher Secondary Certificate</p>
-        <p class="details">Group:Science</p>
-      </div>
-      <div class="card">
-        <div class="duration">2022 – 2023</div>
-        <h3>Kazem Ali School And College</h3>
-        <p class="degree">Secondary School Certificate</p>
-        <p class="details">Group:Science</p>
-      </div>
-    </div>
-  </section>
+    <button class="back-btn" onclick="window.location.href='portfolioindex.html'">Back</button>
+    <section class="edu-section">
+        <h2>Education</h2>
+        <div class="timeline">
+            <div class="card">
+                <div class="duration">∞</div>
+                <h3>University</h3>
+                <p class="degree">Have'nt done yet.</p>
+                <p class="details">Have'nt yet.</p>
+            </div>
+            <div class="card">
+                <div class="duration">Currently Studying</div>
+                <h3>Kazem Ali School And College</h3>
+                <p class="degree">Higher Secondary Certificate</p>
+                <p class="details">Group:Science</p>
+            </div>
+            <div class="card">
+                <div class="duration">2022 – 2023</div>
+                <h3>Kazem Ali School And College</h3>
+                <p class="degree">Secondary School Certificate</p>
+                <p class="details">Group:Science</p>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.card');
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+                });
+            }, { threshold: 0.2 });
+            cards.forEach(c => obs.observe(c));
         });
-      }, { threshold: 0.2 });
-      cards.forEach(c => obs.observe(c));
-    });
-  </script>
+    </script>
 </body>
 </html>
