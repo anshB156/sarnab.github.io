@@ -1,4 +1,4 @@
-// ——— Fade-In on Scroll using IntersectionObserver ———
+
 const cards = document.querySelectorAll('.project-card');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -11,7 +11,7 @@ const observer = new IntersectionObserver((entries) => {
 
 cards.forEach(c => observer.observe(c));
 
-// ——— Simple Filter Logic ———
+
 const filters = document.querySelectorAll('.filters button');
 filters.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -25,7 +25,7 @@ filters.forEach(btn => {
   });
 });
 
-// ——— Placeholder for “View Details” ———
+
 function viewProject(name) {
   alert(`Details for ${name} coming soon!`);
 }
