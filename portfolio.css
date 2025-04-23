@@ -1,11 +1,4 @@
-/*====================================================
-   style3.css — Responsive Portfolio (No Accent Border)
-======================================================*/
-
-/*—— Google Font —————————————*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-
-/*—— Global Reset & Base —————————*/
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +22,7 @@ body {
   overflow-x: hidden;
 }
 
-/*—— Header & Navigation —————————————————————*/
+
 header {
   position: fixed;
   top: 0; left: 0;
@@ -66,7 +59,7 @@ nav a.active {
   border-bottom-color: #fff;
 }
 
-/*—— Section & Layout ————————————————————————*/
+
 section {
   min-height: 100vh;
   padding: 6rem 9% 5rem;
@@ -106,13 +99,13 @@ section {
   font-style: italic;
 }
 
-/*—— Professional Rounded-Rectangle Image Holder (No Border) —————————*/
+
 .home-img {
   width: 320px;
   max-width: 100%;
   border-radius: 1.5rem;
   overflow: hidden;
-  /* subtle neutral glow */
+
   box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
   transition: transform .4s ease;
 }
@@ -126,7 +119,7 @@ section {
   transform: scale(1.03);
 }
 
-/*—— Typing-Text Base ——————————————————————*/
+
 .typing-text {
   font-size: 3.4rem;
   font-weight: 600;
@@ -136,7 +129,7 @@ section {
   color: #b74b4b;
 }
 
-/*—— Social Icons & Button ————————————————————*/
+
 .social-icons {
   margin: 2rem 0;
 }
@@ -179,7 +172,7 @@ section {
   box-shadow: 0 0 25px #b74b4b;
 }
 
-/*—— Responsive Breakpoints —————————————————*/
+
 @media (max-width: 1000px) {
   .home {
     flex-direction: column;
