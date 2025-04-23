@@ -1,112 +1,31 @@
-// Particle Animation
-const canvas = document.createElement('canvas');
-document.getElementById('particle-background').appendChild(canvas);
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const particlesArray = [];
-
-// Create particles
-class Particle {
-    constructor(x, y, size, speedX, speedY) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.speedX = speedX;
-        this.speedY = speedY;
+// ——— Fade-In on Scroll using IntersectionObserver ———
+const cards = document.querySelectorAll('.project-card');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('show');
+      observer.unobserve(e.target);
     }
-    draw() {
-        ctx.fillStyle = 'rgba(255, 75, 75, 0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    }
-}
+  });
+}, { threshold: 0.2 });
 
-// Initialize particles
-function initParticles() {
-    particlesArray.length = 0;
-    for (let i = 0; i < 100; i++) {
-        const size = Math.random() * 3 + 1;
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const speedX = Math.random() * 2 - 1;
-        const speedY = Math.random() * 2 - 1;
-        particlesArray.push(new Particle(x, y, size, speedX, speedY));
-    }
-}
+cards.forEach(c => observer.observe(c));
 
-// Animate particles
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesArray.forEach(particle => {
-        particle.update();
-        particle.draw();
-    });
-    requestAnimationFrame(animateParticles);
-}
-
-// Handle project card interaction
-function viewProject(projectName) {
-    alert(`You clicked on ${projectName}. Details will be available soon!`);
-}
-// Hide loader after 5 seconds
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Allow scrolling after loading
-        }, 500); // Match this duration with the CSS transition duration
-    }, 5000); // 5 seconds
-});
-// Throttle function
-function throttle(func, limit) {
-    let lastFunc;
-    let lastRan;
-    return function() {
-        const context = this;
-        const args = arguments;
-        if (!lastRan) {
-            func.apply(context, args);
-            lastRan = Date.now();
-        } else {
-            clearTimeout(lastFunc);
-            lastFunc = setTimeout(function() {
-                if ((Date.now() - lastRan) >= limit) {
-                    func.apply(context, args);
-                    lastRan = Date.now();
-                }
-            }, limit - (Date.now() - lastRan));
-        }
-    };
-}
-
-// Event listeners
-window.addEventListener('resize', throttle(() => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    initParticles();
-}, 200));
-
-window.addEventListener('scroll', throttle(() => {
-    const cards = document.querySelectorAll('.project-card');
+// ——— Simple Filter Logic ———
+const filters = document.querySelectorAll('.filters button');
+filters.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filters.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const type = btn.dataset.filter;
     cards.forEach(card => {
-        const top = card.getBoundingClientRect().top;
-        if (top < window.innerHeight - 150) {
-            card.classList.add('visible');
-        }
+      card.style.display =
+        (type === 'all' || card.dataset.type === type) ? 'grid' : 'none';
     });
-}, 200));
+  });
+});
 
-// Initialize particles and animations
-initParticles();
-animateParticles();
+// ——— Placeholder for “View Details” ———
+function viewProject(name) {
+  alert(`Details for ${name} coming soon!`);
+}
