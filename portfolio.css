@@ -1,6 +1,5 @@
 /*====================================================
-   style3.css — Full Responsive Portfolio Stylesheet
-   (with professional rounded-rectangle image frame)
+   style3.css — Responsive Portfolio (No Accent Border)
 ======================================================*/
 
 /*—— Google Font —————————————*/
@@ -107,15 +106,14 @@ section {
   font-style: italic;
 }
 
-/*—— Professional Rounded-Rectangle Image Holder —————————*/
+/*—— Professional Rounded-Rectangle Image Holder (No Border) —————————*/
 .home-img {
   width: 320px;
-  height: auto;
   max-width: 100%;
   border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-  border: 4px solid #b74b4b;
+  /* subtle neutral glow */
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
   transition: transform .4s ease;
 }
 .home-img img {
