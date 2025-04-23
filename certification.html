@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
-  <!-- Google Fonts -->
+ 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <!-- AOS CSS for scroll animations -->
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
 
   <title>My Certificates & Skills</title>
@@ -45,7 +45,7 @@
     }
     h1 { font-weight: 700; font-size: 2rem; }
 
-    /* Custom Toggle Switch  */
+   
     .l {
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 0.75em;
@@ -98,7 +98,7 @@
     }
     .l:focus { outline: 0; }
 
-    /* Skills Section */
+  
     .skills-section {
       width: 100%;
       max-width: 1000px;
@@ -147,7 +147,7 @@
       line-height: 1.4;
     }
 
-    /* Certificates Gallery */
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -186,7 +186,7 @@
       color: var(--text-dark);
     }
 
-    /* Modal Lightbox */
+    
     .modal {
       position: fixed;
       top: 0; left: 0;
@@ -229,11 +229,11 @@
     <input class="l" type="checkbox" id="modeToggle" title="Toggle dark/light mode"/>
   </header>
 
-  <!-- Skills Section -->
+ 
   <section class="skills-section">
     <h2 data-aos="fade-up">My Skills</h2>
     <div class="skills-grid">
-      <!-- my skill cards -->
+    
       <div class="skill-card" data-aos="flip-left" data-aos-delay="50">
         <div class="skill-name">User-Centered Design</div>
       </div>
@@ -306,7 +306,7 @@
     </div>
   </section>
 
-  <!-- Certificates Gallery -->
+  
   <section class="gallery">
     <div class="card" data-aos="zoom-in" onclick="openModal(this)">
       <img src="certificate.png" alt="Certificate 1"/>
@@ -322,7 +322,7 @@
     </div>
   </section>
 
-  <!-- Modal Lightbox -->
+
   <div class="modal" id="lightbox">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">×</button>
@@ -331,18 +331,18 @@
     </div>
   </div>
 
-  <!-- AOS JS -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
 
-    // Dark/Light Mode Toggle
+    
     document.getElementById('modeToggle')
       .addEventListener('change', e => {
         document.body.classList.toggle('dark', e.target.checked);
       });
 
-    // Certificate Lightbox
+ 
     function openModal(card) {
       document.getElementById('lightboxImg').src = card.querySelector('img').src;
       document.getElementById('lightboxCaption').textContent = card.querySelector('.caption').textContent;
