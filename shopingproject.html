@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ankhi Chakroborty Mordern Clothing Store</title>
-  <!-- Google Fonts -->
+ 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    /* Global Styles */
+    
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -20,7 +20,7 @@
       overflow-x: hidden;
     }
 
-    /* Header */
+
     header {
       display: flex;
       justify-content: space-between;
@@ -33,7 +33,7 @@
       z-index: 2000;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    /* Logo styling */
+   
     .logo img {
       height: 50px;
     }
@@ -57,7 +57,7 @@
       transform: scale(0.95); 
     }
     
-    /* Interactive Menu Overlay using transform */
+
     .menu-overlay {
       position: fixed;
       top: 0;
@@ -95,7 +95,7 @@
       color: #FFD700;
     }
 
-    /* Hero Section */
+
     .hero {
       height: 100vh;
       display: flex;
@@ -147,7 +147,7 @@
       box-shadow: 0 8px 15px rgba(255,215,0,0.5);
     }
     
-    /* Products Section */
+
     .products {
       padding: 80px 10%;
       text-align: center;
@@ -183,10 +183,10 @@
     .product-slider:hover {
       animation-play-state: paused;
     }
-    /* Each product set now contains exactly 10 cards and has a fixed width */
+
     .product-set {
       display: flex;
-      width: 2680px; /* 10 cards * 250px + 9 gaps * 20px = 2680px */
+      width: 2680px; 
     }
     .product {
       background: white;
@@ -214,7 +214,7 @@
     .product:hover {
       transform: translateY(-5px);
     }
-    /* Custom Buy Now Button (replacing old Shop Now button) */
+
     .button {
       display: flex;
       justify-content: center;
@@ -247,13 +247,13 @@
     .button:hover svg path {
       fill: #181717;
     }
-    /* Animate the product slider: move by one product set width (2680px) */
+
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-2680px); }
     }
 
-    /* Footer */
+  
     .footer {
       background: linear-gradient(45deg, #111, #333);
       color: white;
@@ -340,9 +340,9 @@
 </head>
 <body>
   <header>
-    <!-- Replace text with your logo PNG -->
+    
     <a href="#" class="logo">
-      <img src="shoplogo.png" alt="FlecCoth" />
+      <img src="shoplogo.png" alt="" />
     </a>
     <nav>
       <button type="button" class="menu-button">
@@ -351,7 +351,6 @@
     </nav>
   </header>
 
-  <!-- Interactive Menu Overlay -->
   <div class="menu-overlay" id="menuOverlay">
     <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i></button>
     <a href="#">Home</a>
@@ -381,7 +380,7 @@
     <h2>Preview Of Our Collection</h2>
     <div class="product-carousel">
       <div class="product-slider">
-        <!-- First Product Set (10 Cards) -->
+      
         <div class="product-set">
           <div class="product">
             <img src="1.jpg" alt="Classic Cotton Tee">
@@ -450,9 +449,9 @@
             </button>
           </div>
         </div>
-        <!-- Second Product Set (Duplicate) -->
+       
         <div class="product-set">
-          <!-- Duplicate the same 10 product cards -->
+         
           <div class="product">
             <img src="7.jpeg" alt="Classic Cotton Tee">
             <h3>Classic Cotton Tee ৳460</h3>
@@ -524,11 +523,11 @@
     </div>
   </section>
 
-  <!-- Footer Section with Additional Info -->
+
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">
-        <h2>FlexCoth.</h2>
+        <h2>AnkhiC.</h2>
       </div>
       <div class="footer-links">
         <a href="https://www.facebook.com/profile.php?id=100087334909160&mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
@@ -547,7 +546,7 @@
   </footer>
 
   <script>
-    // Toggle the interactive menu overlay
+    
     const menuButton = document.querySelector('.menu-button');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenu = document.getElementById('closeMenu');
