@@ -32,28 +32,27 @@
     </div>
   </div>
 
-  <!-- Success Modal -->
+ 
   <div class="modal-overlay" id="modal">
     <div class="modal">
       <h2>Payment Successful!</h2>
       <p>Thank you for your purchase.</p>
-      <button class="btn" id="continueBtn">Continue Shopping</button>
+     <button class="btn" id="continueBtn">Continue Shopping</button>
     </div>
   </div>
 
   <script>
-    // Populate order summary
+
     const p = new URLSearchParams(location.search);
     document.getElementById('c-item-name').textContent = p.get('name') || '—';
     document.getElementById('c-item-price').textContent = p.get('price') || '0.00';
 
-    // Pay Now handler
-    document.getElementById('payNow').onclick = () => {
+      document.getElementById('payNow').onclick = () => {
       document.getElementById('modal').style.display = 'flex';
     };
-    document.getElementById('continueBtn').onclick = () => {
-      window.location.href = 'product_list.html';
-    };
+    document.getElementById('continueBtn').addEventListener('click', function() {
+    window.location.href = 'shopingproject.html';
+  });
   </script>
 </body>
 </html>
