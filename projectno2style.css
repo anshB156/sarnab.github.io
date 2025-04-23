@@ -9,7 +9,7 @@ scroll-behavior: smooth;
 background-color: #1a1a1a;
 color: #ffffff;
 }
-/* Stylish Dropdown Navbar */
+
 .navbar {
 position: fixed;
 top: 0;
@@ -58,7 +58,7 @@ color: #ffffff;
 .dropdown:hover .dropdown-content {
 display: block;
 }
-/* Section Styling */
+
 section {
 height: 100vh;
 display: flex;
@@ -73,7 +73,7 @@ section.visible {
 opacity: 1;
 transform: translateY(0);
 }
-/* Landing Section */
+
 #landing {
 background: radial-gradient(circle at center, #ff0000, #1a1a1a);
 animation: background-fade 10s infinite alternate;
@@ -108,7 +108,7 @@ transition: transform 0.3s ease, background-color 0.3s ease;
 background: #ff6f6f;
 transform: scale(1.1);
 }
-/* About Section */
+
 #about {
 background: #1a1a1a;
 }
@@ -122,7 +122,7 @@ margin: 20px auto;
 font-size: 1.2rem;
 line-height: 1.8;
 }
-/* Contact Section */
+
 #contact {
 background: linear-gradient(to top right, #1a1a1a, #400000);
 }
