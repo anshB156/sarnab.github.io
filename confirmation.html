@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Confirm Purchase</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Confirm Your Order</h1>
+    
+    <div class="summary">
+      <h2>Order Summary</h2>
+      <p><strong>Item:</strong> <span id="item-name"></span></p>
+      <p><strong>Price:</strong> $<span id="item-price"></span></p>
+    </div>
+    
+    <div style="text-align:center;">
+      <button 
+        class="btn"
+        id="cancelBtn"
+      >Cancel</button>
+      <button 
+        class="btn"
+        id="confirmBtn"
+      >Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    // Read URL params
+    const params = new URLSearchParams(location.search);
+    const name = params.get('name') || '—';
+    const price = params.get('price') || '0.00';
+    document.getElementById('item-name').textContent = name;
+    document.getElementById('item-price').textContent = price;
+    
+    document.getElementById('cancelBtn').onclick = () => {
+      window.location.href = 'product_list.html';
+    };
+    document.getElementById('confirmBtn').onclick = () => {
+      // Pass through to checkout
+      window.location.href = 
+        `checkout.html?name=${encodeURIComponent(name)}&price=${price}`;
+    };
+  </script>
+</body>
+</html>
