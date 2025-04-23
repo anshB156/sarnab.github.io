@@ -1,0 +1,218 @@
+/*—— Google Font —————————————*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+/*—— Global Reset & Base —————————*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/*—— Header & Navigation —————————————————————*/
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  padding: 1rem 9%;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .5s ease;
+}
+.logo:hover {
+  transform: scale(1.1);
+}
+
+nav a {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-left: 4rem;
+  font-weight: 500;
+  transition: all .3s ease;
+  border-bottom: 3px solid transparent;
+}
+nav a:hover,
+nav a.active {
+  border-bottom-color: #fff;
+}
+
+/*—— Section & Layout ————————————————————————*/
+section {
+  min-height: 100vh;
+  padding: 6rem 9% 5rem;
+}
+
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+  background: #000;
+}
+
+.home-content {
+  max-width: 600px;
+}
+
+.home-content h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.home-content h1 span {
+  color: #b74b4b;
+}
+
+.home-content h3 {
+  font-size: 4rem;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+.home-content p {
+  font-size: 1.6rem;
+  margin: 1rem 0;
+  max-width: 500px;
+  font-style: italic;
+}
+
+/*—— Hexagon Image Holder ————————————————————*/
+.home-img {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+  box-shadow: 0 0 30px rgba(183, 75, 75, 0.5);
+  transition: transform .5s ease;
+}
+.home-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-img:hover {
+  transform: rotate(10deg) scale(1.05);
+}
+
+/*—— Typing-Text Base ——————————————————————*/
+.typing-text {
+  font-size: 3.4rem;
+  font-weight: 600;
+  min-width: 280px;
+}
+.typing-text span {
+  color: #b74b4b;
+}
+
+/*—— Social Icons & Button ————————————————————*/
+.social-icons {
+  margin: 2rem 0;
+}
+.social-icons a {
+  display: inline-flex;
+  width: 4rem; height: 4rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+  color: #b74b4b;
+  border: .2rem solid #b74b4b;
+  border-radius: 50%;
+  transition: all .3s ease;
+}
+.social-icons a:hover {
+  color: #000;
+  background: #fff;
+  transform: scale(1.3) translateY(-5px);
+  box-shadow: 0 0 25px #b74b4b;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: .3rem;
+  color: #b74b4b;
+  background: #000;
+  border: 2px solid #b74b4b;
+  border-radius: 4rem;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #b74b4b;
+}
+
+/*—— Responsive Breakpoints —————————————————*/
+@media (max-width: 1000px) {
+  .home {
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .home-img {
+    width: 250px;
+    height: 250px;
+  }
+  .home-content h1 {
+    font-size: 4.5rem;
+  }
+  .home-content h3 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 55%;
+  }
+  .home-img {
+    width: 200px;
+    height: 200px;
+  }
+  .home-content h1 {
+    font-size: 3.5rem;
+  }
+  .home-content h3 {
+    font-size: 2.5rem;
+  }
+  .home-content p {
+    font-size: 1.4rem;
+  }
+}
