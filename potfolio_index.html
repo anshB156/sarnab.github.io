@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="portfolio.css">
     <title>My second portfolio design</title>
 </head>
 <body> 
     <header>
-        <a href="#" class="logo">Sarnab</a>
+        <a href="#" class="logo">Arnab</a>
         <nav>
             <a href="index.html" class="active"> Home</a>
             <a href="projectshowcasinghtml.html" >Projects</a>
@@ -25,7 +25,7 @@
         </div>
         <div class="home-content">
             <h1>Hi, It's <span> me Sarnab Bhattacharjee!</span></h1>
-            <h3 class="typing-text">I'm a <span></span></h3>
+            <h3 class="typing-text">I'm a <span id="typed"></span></h3>
             <p><i>Yeah, I kinda built this portfolio as a beginer, supprising right? How did i you may wonder right? So, it's well very simple research and learning from everywhere.</i></p>
             <div class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=100087334909160&mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
@@ -34,7 +34,45 @@
                 <a href="blankpage.html"><i class="fa-brands fa-youtube"></i></a>
             </div>
             <a href="mailto:sarnabbhattacharjee00@gmail.com?subject={Hey, are you up for a project?}" class="btn">Book</a>
-        </div>
+            </div>
     </section>
+  <script>
+  // List of roles (feel free to tweak/add more!)
+  const texts = [
+    "Web Dev",
+    "Frontend Dev",
+    "Web UI Designer",
+    "UX Designer",
+    "Interaction Designer",
+    "User Researcher",
+    "Information Architect"
+  ];
+  let charIndex = 0, textIndex = 0;
+
+  function type() {
+    const currentText = texts[textIndex];
+    if (charIndex < currentText.length) {
+      document.getElementById("typed").textContent += currentText[charIndex++];
+      setTimeout(type, 150);
+    } else {
+      setTimeout(erase, 2000);
+    }
+  }
+
+  function erase() {
+    if (charIndex > 0) {
+      document.getElementById("typed").textContent =
+        texts[textIndex].substring(0, --charIndex);
+      setTimeout(erase, 100);
+    } else {
+      textIndex = (textIndex + 1) % texts.length;
+      setTimeout(type, 500);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(type, 1000);
+  });
+</script>
 </body>
 </html>
