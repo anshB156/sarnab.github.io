@@ -1,157 +1,146 @@
+/*—— Variables & Reset ———————————————————————*/
+:root {
+  --bg-start: #1a1a1a;
+  --accent: rgba(255,75,75,0.8);
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.2);
+  --text-light: #eee;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0; padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-    font-family: 'Arial', sans-serif;
-    scroll-behavior: smooth;
-    color: #ffffff;
-    overflow: hidden; /* Prevent scrolling while loading */
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-light);
+  overflow: hidden;
+  background: var(--bg-start);
 }
 
-/* Loader Styles */
-#loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+/*—— Back Button ——————————————————————————*/
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 100px;
+  margin: 1rem;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  border: none;
+}
+.back-btn svg {
+  margin: 0 5px;
+  transition: all 0.4s ease-in;
+}
+.back-btn:hover svg {
+  font-size: 1.2em;
+  transform: translateX(-5px);
+}
+.back-btn:hover {
+  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+  transform: translateY(-2px);
 }
 
-.loader-icon {
-    width: 80px;
-    height: 80px;
-    border: 10px solid #ff4b4b;
-    border-top: 10px solid transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+/*—— Background Gradient ————————————————————*/
+#bg-gradient {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, #111, #2a2a2a, #111);
+  background-size: 400% 400%;
+  animation: gradientMove 20s ease infinite;
+  z-index: -1;
 }
 
-.loader-text {
-    margin-top: 20px;
-    color: #ff4b4b;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Background Animation */
-#particle-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(45deg, #ff4b4b, #1c1c1c, #ff4b4b);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-}
-
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Header Section */
+/*—— Header & Filters ———————————————————————*/
 header {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: sticky; top: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(20,20,20,0.7);
+  padding: 1rem 2rem;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between;
+  z-index: 10;
+  border-bottom: 1px solid var(--glass-border);
 }
-
 header h1 {
-    font-size: 2.5rem;
-    text-transform: uppercase;
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+}
+.filters {
+  display: flex; gap: 0.5rem; margin-top: 0.5rem;
+}
+.filters button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.filters button.active,
+.filters button:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
 }
 
-/* Project Showcase */
-.project-showcase {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    position: relative;
-    text-align: center;
-    z-index: 1;
-}
-
-.project-showcase h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #ff4b4b;
-}
-
+/*—— Project Grid —————————————————————————*/
 .project-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 2rem;
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
 
+/*—— Cards (Glass-morphic) ————————————————————*/
 .project-card {
-    background: rgba(255, 75, 75, 0.9);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    transform: scale(1);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  text-align: center;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
-.project-card:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+.project-card.show {
+  opacity: 1; transform: translateY(0);
 }
-
 .project-card h3 {
-    margin-bottom: 10px;
+  font-size: 1.8rem; margin-bottom: 0.5rem;
 }
-
 .project-card p {
-    font-size: 1rem;
-    margin-bottom: 15px;
+  font-size: 1rem; margin-bottom: 1rem;
 }
-
 .project-card button {
-    background: #ffffff;
-    color: #ff4b4b;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .project-card button:hover {
-    background-color: #ff4b4b;
-    color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255,75,75,0.5);
 }
 
-/* Footer Section */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+/*—— Keyframes & Media —————————————————————*/
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 600px) {
+  .back-btn { width: 90px; height: 2.5em; }
+  header { flex-direction: column; align-items: flex-start; }
+  .filters { margin-bottom: 1rem; }
+  .project-gallery { padding: 1rem; }
 }
