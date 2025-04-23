@@ -1,4 +1,3 @@
-// script_project#2.js
 const sections = document.querySelectorAll('section');
 function revealOnScroll() {
 sections.forEach(section => {
