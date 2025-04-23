@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Projects</title>
-<link rel="stylesheet" href="project_showcasing_style.css"> <!-- Link to external CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Projects</title>
+  <link rel="stylesheet" href="project_showcasing_style.css">
 </head>
 <body>
-  <!-- Loader -->
-    <div id="loader">
-        <div class="loader-icon"></div>
-        <div class="loader-text">Loading...</div>
-    </div>
-<!-- Background Animation -->
-<div id="particle-background"></div>
-<!-- Header Section -->
-<header>
-<h1>Welcome to My Project Gallery</h1>
-</header>
-<!-- Project Showcase Sidebar -->
-<div class="project-showcase">
-<h2>Explore My Projects</h2>
-<div class="project-gallery">
-<div class="project-card">
-<h3>Project 1</h3>
-<p>Another Web-Page Project.</p>
-<button class="button" onclick="location.href='projectno2.html'">View Details</button>
-</div>
-<div class="project-card">
-<h3>Project 2</h3>
-<p>Complete Webpage project.</p>
-<button class="button" onclick="location.href='index.html'">View Details</button>
-</div>
-<div class="project-card">
-<h3>Project 3</h3>
-<p>Shoping Web_Site</p>
-<button class="button" onclick="location.href='shopingproject.html'">View Details</button>
-</div>
-<div class="project-card">
-<h3>Project 4</h3>
-<p>Working on it...</p>
-<button onclick="viewProject('Project 4')">View Details</button>
-</div>
-</div>
-</div>
-<!-- Footer Section -->
-<footer>
-</footer>
-<script src="projectshowcasing_script.js"></script>
+  <!-- Back Button -->
+  <button class="back-btn" onclick="history.back()">
+    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"/>
+    </svg>
+    <span>Back</span>
+  </button>
+
+  <!-- Background Gradient -->
+  <div id="bg-gradient"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>Project Gallery</h1>
+    <nav class="filters">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="web">Web Dev</button>
+      <button data-filter="ux">UX/UI</button>
+      <button data-filter="ecom">E-Commerce</button>
+    </nav>
+  </header>
+
+  <!-- Projects -->
+  <main class="project-gallery">
+    <article class="project-card" data-type="web">
+      <h3>Project 1</h3>
+      <p>Another Web-Page Project.</p>
+      <button onclick="location.href='projectno2.html'">View Details</button>
+    </article>
+
+    <article class="project-card" data-type="web">
+      <h3>Project 2</h3>
+      <p>Complete Webpage Project.</p>
+      <button onclick="location.href='index.html'">View Details</button>
+    </article>
+
+    <article class="project-card" data-type="ecom">
+      <h3>Project 3</h3>
+      <p>Shopping Website.</p>
+      <button onclick="location.href='shopingproject.html'">View Details</button>
+    </article>
+
+    <article class="project-card" data-type="ux">
+      <h3>Project 4</h3>
+      <p>Design in progress…</p>
+      <button onclick="viewProject('Project 4')">View Details</button>
+    </article>
+  </main>
+
+  <script src="projectshowcasing_script.js"></script>
 </body>
 </html>
