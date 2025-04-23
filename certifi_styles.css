@@ -21,8 +21,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   font-size: 18px;
-  color: #0fe2ad; /* Text color */
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+  color: #0fe2ad; 
+  background-color: rgba(0, 0, 0, 0.7); 
   padding: 10px 20px;
   border-radius: 5px;
 }
