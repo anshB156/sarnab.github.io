@@ -27,5 +27,5 @@ filters.forEach(btn => {
 
 
 function viewProject(name) {
-  alert(`Details for ${name} coming soon!`);
+  alert(`My ${name} files got completely destroyed due to a technical issue but I will again work on it(its a game project) after exam!`);
 }
