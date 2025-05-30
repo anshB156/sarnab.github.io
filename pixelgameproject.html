@@ -250,8 +250,9 @@
 
       const vid = document.createElement("video1.mp4");
       vid.src = "video1.mp4";
-      vid.autoplay = true;
-      vid.muted = true;
+    vid.autoplay = true;
+      vid.muted = false;
+      vid.setAttribute("muted", "");
       vid.setAttribute("playsinline", "");
       vid.controls = false;
       vid.style.width = "100%";
