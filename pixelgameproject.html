@@ -52,8 +52,12 @@
       z-index: 5;
     }
     #pauseBtn { right: 120px; }
-    #cheatToggle { right: 70px; border-radius: 50%; width: 40px; height: 40px; }
-
+    #cheatToggle {
+      right: 70px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
     #cheatContainer {
       position: absolute;
       top: 60px;
@@ -120,7 +124,6 @@
     }
   </style>
 </head>
-
 <body>
   <div id="creatorTag">Created by Sarnab</div>
   <div id="counter">Boxes Collected: 0 / 12</div>
@@ -220,12 +223,8 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.save();
       ctx.translate(-player.x + canvas.width / 2, 0);
-
       platforms.forEach(p => drawRect(p, "#444"));
-      goals.forEach(g => {
-        if (!g.collected) drawRect(g, "gold");
-      });
-
+      goals.forEach(g => { if (!g.collected) drawRect(g, "gold"); });
       drawRect(player, "lime");
       ctx.restore();
     }
@@ -249,12 +248,16 @@
       overlay.style.background = "rgba(0,0,0,0.8)";
       overlay.style.zIndex = 20;
 
-      const vid = document.createElement("video1");
-      vid.src = "video1";
+      const vid = document.createElement("video");
+      vid.src = "video1.mp4";
       vid.autoplay = true;
+      vid.muted = true;
+      vid.setAttribute("muted", "");
+      vid.setAttribute("playsinline", "");
       vid.controls = false;
       vid.style.width = "100%";
       vid.style.height = "100%";
+      vid.style.objectFit = "cover";
       overlay.appendChild(vid);
 
       vid.onended = () => {
