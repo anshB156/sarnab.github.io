@@ -122,11 +122,23 @@
       from { transform: translateX(-50px); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
+    #jumpIndicator {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #0f0;
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #0f0;
+      z-index: 5;
+    }
   </style>
 </head>
 <body>
   <div id="creatorTag">Created by Sarnab</div>
   <div id="counter">Boxes Collected: 0 / 12</div>
+  <div id="jumpIndicator">Jumps Left: 2</div>
   <canvas id="gameCanvas"></canvas>
   <button id="pauseBtn">Pause</button>
   <button id="cheatToggle">C</button>
@@ -152,6 +164,16 @@
     let gamePaused = false, gameWon = false;
 
     const counterEl = document.getElementById("counter");
+    const jumpIndicator = document.getElementById("jumpIndicator");
+
+    function updateJumpIndicator() {
+      if (!doubleJumpUnlocked) {
+        jumpIndicator.innerText = '';
+      } else {
+        let jumpsLeft = player.jumping ? (player.doubleJump ? 1 : 0) : 2;
+        jumpIndicator.innerText = `Jumps Left: ${jumpsLeft}`;
+      }
+    }
 
     function setupGame() {
       platforms = [];
@@ -217,6 +239,8 @@
           }
         }
       });
+
+      updateJumpIndicator();
     }
 
     function draw() {
@@ -248,10 +272,10 @@
       overlay.style.background = "rgba(0,0,0,0.8)";
       overlay.style.zIndex = 20;
 
-      const vid = document.createElement("video1.mp4");
+      const vid = document.createElement("video");
       vid.src = "video1.mp4";
-    vid.autoplay = true;
-      vid.muted = false;
+      vid.autoplay = true;
+      vid.muted = true;
       vid.setAttribute("muted", "");
       vid.setAttribute("playsinline", "");
       vid.controls = false;
