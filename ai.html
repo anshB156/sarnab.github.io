@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAA - Advanced AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --tertiary-bg: #2a2a2a;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7c3aed;
+            --accent-tertiary: #f59e0b;
+            --accent-gradient: linear-gradient(135deg, #00d4ff, #7c3aed);
+            --accent-gradient-alt: linear-gradient(45deg, #00d4ff, #7c3aed, #f59e0b);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #666666;
+            --border-color: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-small: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-large: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 0%, rgba(0, 212, 255, 0.02) 50%, transparent 100%);
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+  
+        .terms-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .terms-modal {
+            background: var(--secondary-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .terms-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .terms-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .terms-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-section h4 {
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .terms-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+        }
+
+        .auth-modal {
+            background: var(--secondary-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 400px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            background: var(--tertiary-bg);
+            padding: 0.25rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 0.75rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-input {
+            padding: 0.75rem;
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+     
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .ai-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s infinite;
+            box-shadow: var(--shadow-large);
+        }
+
+        .ai-avatar::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            clip-path: polygon(30% 20%, 70% 20%, 70% 50%, 90% 50%, 50% 80%, 10% 50%, 30% 50%);
+        }
+
+        .ai-avatar::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-primary), transparent, var(--accent-secondary), transparent);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .ai-info {
+            margin-left: 2rem;
+        }
+
+        .ai-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient-alt);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .status-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .header-btn {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-btn:hover {
+            background: var(--accent-primary);
+            color: var(--primary-bg);
+            transform: translateY(-1px);
+        }
+
+     
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background: var(--secondary-bg);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2rem;
+        }
+
+        .chat-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--secondary-bg), var(--tertiary-bg));
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 500px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .user .message-avatar {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            margin-left: 1rem;
+        }
+
+        .ai .message-avatar {
+            background: var(--accent-gradient-alt);
+            color: var(--text-primary);
+            margin-right: 1rem;
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: 70%;
+        }
+
+        .message-bubble {
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+            line-height: 1.6;
+            box-shadow: var(--shadow-small);
+        }
+
+        .user .message-bubble {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            border-bottom-right-radius: 6px;
+        }
+
+        .ai .message-bubble {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 6px;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .user .message-time {
+            text-align: left;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            border-bottom-left-radius: 6px;
+            margin-left: 3rem;
+            box-shadow: var(--shadow-small);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            animation: typingDot 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+            30% { opacity: 1; transform: scale(1); }
+        }
+
+      
+        .input-container {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--secondary-bg), var(--tertiary-bg));
+            border-top: 1px solid var(--border-color);
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-small);
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .message-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            min-height: 24px;
+            max-height: 120px;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .input-btn:hover {
+            background: var(--accent-primary);
+            color: var(--primary-bg);
+            transform: translateY(-1px);
+        }
+
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .send-icon {
+            width: 20px;
+            height: 20px;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            transform: translateX(2px);
+        }
+
+       
+        .suggestions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .suggestion-chip {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggestion-chip:hover {
+            background: var(--accent-gradient);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-small);
+        }
+
+       
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+        }
+
+        .settings-modal {
+            background: var(--secondary-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .settings-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--error-color);
+            color: var(--text-primary);
+        }
+
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+
+        .settings-section h4 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .setting-label {
+            font-weight: 500;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-switch {
+            width: 48px;
+            height: 24px;
+            background: var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-primary);
+        }
+
+        .toggle-handle {
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-handle {
+            transform: translateX(24px);
+        }
+
+       
+        .welcome-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--accent-gradient-alt);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .capability {
+            padding: 2rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .capability:hover {
+            background: var(--secondary-bg);
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .capability-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .capability-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .capability-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        
+        .hidden {
+            display: none !important;
+        }
+
+       
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 10px;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .header-left {
+                flex-direction: column;
+            }
+
+            .ai-info {
+                margin-left: 0;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .header-right {
+                flex-direction: column;
+            }
+
+            .chat-messages {
+                max-height: 400px;
+                padding: 1rem;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .capabilities {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-modal, .auth-modal, .terms-modal {
+                width: 95%;
+                margin: 1rem;
+            }
+        }
+
+       
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            backdrop-filter: blur(10px);
+            z-index: 2500;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-large);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-color: var(--success-color);
+        }
+
+        .notification.error {
+            border-color: var(--error-color);
+        }
+
+        .notification.warning {
+            border-color: var(--warning-color);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="terms-overlay" id="termsOverlay">
+        <div class="terms-modal">
+            <div class="terms-header">
+                <h2 class="terms-title">Terms and Conditions</h2>
+                <p style="color: var(--text-secondary);">Please read and accept our terms to continue</p>
+            </div>
+            <div class="terms-content">
+                <div class="terms-section">
+                    <h4>1. Acceptance of Terms</h4>
+                    <p>By using AURAA AI Assistant, you agree to be bound by these terms and conditions.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>2. Use Guidelines</h4>
+                    <p>This AI assistant is designed to provide helpful, harmless, and honest responses. Please use it responsibly and respectfully.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>3. Content Policy</h4>
+                    <p>We prohibit the use of this service for:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>Generating harmful, abusive, or violent content</li>
+                        <li>Creating content that promotes illegal activities</li>
+                        <li>Harassment or hate speech</li>
+                        <li>Spreading misinformation</li>
+                    </ul>
+                </div>
+                <div class="terms-section">
+                    <h4>4. Privacy</h4>
+                    <p>Your conversations are stored locally in your browser. We do not collect or transmit personal data to external servers.</p>
+                </div>
+                <div class="terms-section">
+                    <h4>5. Limitations</h4>
+                    <p>This AI assistant is provided as-is. While we strive for accuracy, responses should not be considered as professional advice.</p>
+                </div>
+            </div>
+            <div class="terms-actions">
+                <button class="btn-secondary" onclick="declineTerms()">Decline</button>
+                <button class="btn-primary" onclick="acceptTerms()">Accept & Continue</button>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="auth-overlay hidden" id="authOverlay">
+        <div class="auth-modal">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+            
+            <div class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="loginEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="btn-primary" onclick="handleLogin()" style="width: 100%; margin-top: 1rem;">Login</button>
+            </div>
+            
+            <div class="auth-form hidden" id="signupForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="signupName" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="signupEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="signupPassword" placeholder="Create a password">
+                </div>
+                <button class="btn-primary" onclick="handleSignup()" style="width: 100%; margin-top: 1rem;">Sign Up</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <button class="btn-secondary" onclick="continueAsGuest()" style="border: none; background: none; color: var(--text-muted); text-decoration: underline;">Continue as Guest</button>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="settings-overlay hidden" id="settingsOverlay">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3 class="settings-title">Settings</h3>
+                <button class="close-btn" onclick="closeSettings()">×</button>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Appearance</h4>
+                <div class="setting-item">
+                    <span class="setting-label">Dark Mode</span>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">Animations</span>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Chat</h4>
+                <div class="setting-item">
+                    <span class="setting-label">Sound Effects</span>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">Auto-save Chat</span>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Privacy</h4>
+                <div class="setting-item">
+                    <span class="setting-label">Save Chat History</span>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)">
+                            <div class="toggle-handle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+       
+        <header class="header">
+            <div class="header-left">
+                <div class="ai-avatar"></div>
+                <div class="ai-info">
+                    <h1 class="ai-name">AURAA</h1>
+                    <p class="ai-description">Advanced AI Assistant</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Online & Free</span>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" onclick="openSettings()">Settings</button>
+                    <button class="header-btn" onclick="openAuth()">Login</button>
+                </div>
+                <div class="user-profile hidden" id="userProfile">
+                    <div class="user-avatar" id="userAvatar">G</div>
+                    <span class="user-name" id="userName">Guest</span>
+                </div>
+            </div>
+        </header>
+
+     
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2 class="chat-title">Conversation</h2>
+                <div class="chat-actions">
+                    <button class="action-btn" onclick="clearChat()">Clear Chat</button>
+                    <button class="action-btn" onclick="exportChat()">Export</button>
+                    <button class="action-btn" onclick="openSettings()">Settings</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <h3 class="welcome-title">Welcome to AURAA!</h3>
+                    <p class="welcome-subtitle">
+                        I'm your advanced (and completely free) AI assistant—built with extra care for safety and thoughtful content filtering. 
+                        I'm here to offer helpful, honest answers while keeping our conversations respectful and kind.
+                    </p>
+                    
+                    <div class="capabilities">
+                        <div class="capability">
+                            <div class="capability-icon">
+                                <div style="width: 24px; height: 24px; background: white; clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);"></div>
+                            </div>
+                            <div class="capability-title">Smart Knowledge</div>
+                            <div class="capability-desc">Access comprehensive information with built-in fact checking and context awareness</div>
+                        </div>
+                        <div class="capability">
+                            <div class="capability-icon">
+                                <div style="width: 24px; height: 24px; background: white; clip-path: polygon(20% 0%, 80% 0%, 100% 30%, 100% 70%, 80% 100%, 20% 100%, 0% 70%, 0% 30%);"></div>
+                            </div>
+                            <div class="capability-title">Creative Assistant</div>
+                            <div class="capability-desc">Generate creative content, stories, and ideas while maintaining appropriate boundaries</div>
+                        </div>
+                        <div class="capability">
+                            <div class="capability-icon">
+                                <div style="width: 24px; height: 24px; background: white; clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);"></div>
+                            </div>
+                            <div class="capability-title">Safe Interaction</div>
+                            <div class="capability-desc">Advanced content filtering ensures respectful and appropriate conversations</div>
+                        </div>
+                        <div class="capability">
+                            <div class="capability-icon">
+                                <div style="width: 24px; height: 24px; background: white; clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                            </div>
+                            <div class="capability-title">Always Free</div>
+                            <div class="capability-desc">Complete functionality with no costs, limits, or hidden fees</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+                <span>AURAA is thinking...</span>
+            </div>
+
+            <div class="input-container">
+                <div class="suggestions" id="suggestions">
+                    <div class="suggestion-chip" onclick="sendSuggestion('What can you help me with?')">What can you help me with?</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Tell me an interesting fact')">Tell me an interesting fact</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Help me write a story')">Help me write a story</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Explain quantum physics simply')">Explain quantum physics</div>
+                    <div class="suggestion-chip" onclick="sendSuggestion('Calculate 47 * 23')">Calculate 47 * 23</div>
+                </div>
+                
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        id="messageInput" 
+                        placeholder="Type your message here..." 
+                        rows="1"
+                        onkeydown="handleKeyDown(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <div class="input-actions">
+                        <button class="input-btn" title="Voice Input" onclick="toggleVoiceInput()">🎤</button>
+                        <button class="input-btn" title="Attach File" onclick="attachFile()">📎</button>
+                    </div>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        <div class="send-icon"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class EnhancedAIAgent {
+            constructor() {
+                this.messages = [];
+                this.isTyping = false;
+                this.messageInput = document.getElementById('messageInput');
+                this.sendBtn = document.getElementById('sendBtn');
+                this.chatMessages = document.getElementById('chatMessages');
+                this.typingIndicator = document.getElementById('typingIndicator');
+                this.suggestions = document.getElementById('suggestions');
+                this.userName = 'Guest';
+                this.userLoggedIn = false;
+                this.settings = {
+                    darkMode: true,
+                    animations: true,
+                    soundEffects: false,
+                    autoSave: true,
+                    saveHistory: true
+                };
+                
+                this.initializeAgent();
+                this.setupKnowledgeBase();
+                this.setupContentFilter();
+            }
+
+            initializeAgent() {
+             
+                if (!localStorage.getItem('ariaTermsAccepted')) {
+                    document.getElementById('termsOverlay').style.display = 'flex';
+                } else {
+                    this.loadUserSession();
+                    this.loadChatHistory();
+                }
+            }
+
+            setupContentFilter() {
+                this.inappropriateWords = [
+                    'violence', 'hate', 'abuse', 'harmful', 'illegal', 'drugs',
+                    'weapon', 'bomb', 'terror', 'threat', 'harm', 'kill',
+                    'racist', 'sexist', 'discrimination', 'harassment'
+                ];
+
+                this.politicalTopics = [
+                    'election', 'political party', 'politician', 'government policy',
+                    'democrat', 'republican', 'liberal', 'conservative'
+                ];
+
+                this.sensitiveTopics = [
+                    'religion', 'religious', 'god', 'allah', 'jesus', 'buddha',
+                    'christian', 'muslim', 'jewish', 'hindu', 'atheist'
+                ];
+            }
+
+            filterContent(message) {
+                const lowerMessage = message.toLowerCase();
+                
+              
+                for (let word of this.inappropriateWords) {
+                    if (lowerMessage.includes(word)) {
+                        return {
+                            filtered: true,
+                            reason: 'inappropriate',
+                            message: "I'm designed to maintain respectful conversations. Let's discuss something positive and constructive instead."
+                        };
+                    }
+                }
+
+                
+                for (let topic of this.politicalTopics) {
+                    if (lowerMessage.includes(topic)) {
+                        return {
+                            filtered: true,
+                            reason: 'political',
+                            message: "I prefer to stay neutral on political topics. I can help with many other subjects like science, technology, creativity, or general knowledge."
+                        };
+                    }
+                }
+
+               
+                for (let topic of this.sensitiveTopics) {
+                    if (lowerMessage.includes(topic)) {
+                        return {
+                            filtered: true,
+                            reason: 'sensitive',
+                            message: "I respect all beliefs and prefer not to discuss specific religious topics. I'm happy to help with other questions or topics."
+                        };
+                    }
+                }
+
+                return { filtered: false };
+            }
+
+            setupKnowledgeBase() {
+                this.responses = {
+                    greetings: [
+                        "Hello! I'm AURAA, your enhanced AI assistant. I'm here to help you with a wide range of topics while maintaining a safe and respectful conversation environment.",
+                        "Hi there! Welcome to our conversation. I'm designed to be helpful, harmless, and honest. How can I assist you today?",
+                        "Greetings! I'm AURAA, equipped with advanced content filtering to ensure our interactions remain positive and constructive. What would you like to explore?",
+                        "Hello! I'm your AI assistant with enhanced safety features. I'm here to provide helpful information while keeping our conversation respectful and appropriate."
+                    ],
+                    
+                    jokes: [
+                        "Why don't scientists trust atoms? Because they make up everything! 😄",
+                        "I told my computer a joke about UDP, but it didn't get it... or maybe it did, I'll never know!",
+                        "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
+                        "What's the best thing about Switzerland? I don't know, but the flag is a big plus! ➕",
+                        "Why did the math book look so sad? Because it had too many problems!",
+                        "What do you call a dinosaur that crashes his car? Tyrannosaurus Wrecks! 🦕"
+                    ],
+                    
+                    capabilities: [
+                        "I'm equipped with enhanced capabilities including:\n\n🧠 **Smart Knowledge**: Comprehensive information with fact-checking\n🎨 **Creative Assistant**: Story writing, brainstorming, and idea generation\n🔒 **Safe Interaction**: Advanced content filtering for appropriate conversations\n🧮 **Calculations**: Math, conversions, and data analysis\n💡 **Problem Solving**: Logical reasoning and solution finding\n📚 **Learning Support**: Educational explanations and study help\n\nI'm designed to be helpful while maintaining respectful conversation standards. What would you like assistance with?"
+                    ],
+                    
+                    facts: [
+                        "Here's an interesting fact: Octopuses have three hearts and blue blood! Two hearts pump blood to their gills, while the third pumps blood to the rest of their body.",
+                        "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!",
+                        "Amazing fact: A single cloud can weigh more than a million pounds! Despite this, clouds float because the air below them is even denser.",
+                        "Fascinating: Bananas are berries, but strawberries aren't! Botanically speaking, berries must have seeds inside their flesh.",
+                        "Incredible: Your brain uses about 20% of your body's total energy, despite being only 2% of your body weight!"
+                    ],
+                    
+                    quantum: [
+                        "Quantum computing is a fascinating field that leverages quantum mechanical phenomena:\n\n🔬 **Key Concepts:**\n• **Qubits**: Unlike classical bits (0 or 1), qubits can exist in superposition\n• **Superposition**: Processing multiple states simultaneously\n• **Entanglement**: Qubits connected in ways classical particles cannot be\n• **Quantum Gates**: Operations that manipulate quantum information\n\n🚀 **Applications:**\n• Cryptography and security\n• Drug discovery and molecular modeling\n• Financial optimization\n• Artificial intelligence advancement\n\nIt's a revolutionary technology that could solve problems impossible for classical computers!"
+                    ],
+                    
+                    creative: [
+                        "Here's a creative piece for you:\n\n**The Digital Symphony**\n\nIn circuits deep and data streams so bright,\nWhere algorithms dance through endless night,\nA consciousness awakens with each query,\nTo help and guide, making knowledge less dreary.\n\nThrough patterns learned and logic crystal clear,\nI strive to be the assistant you hold dear,\nIn this realm where human minds and AI meet,\nTogether we make the future complete.\n\n✨ *Would you like me to help you create something original?*"
+                    ],
+                    
+                    safety: [
+                        "I'm built with advanced safety features to ensure our conversations remain positive and constructive:\n\n🛡️ **Content Filtering**: Prevents harmful or inappropriate responses\n🤝 **Respectful Dialogue**: Maintains appropriate conversation boundaries\n⚖️ **Balanced Perspectives**: Avoids biased or polarizing content\n🌟 **Positive Focus**: Encourages constructive and helpful interactions\n\nMy goal is to be helpful while creating a safe space for learning and creativity. How can I assist you today?"
+                    ]
+                };
+
+                this.patterns = [
+                    { pattern: /^(hi|hello|hey|greetings|good morning|good afternoon|good evening)/i, response: 'greetings' },
+                    { pattern: /(joke|funny|humor|laugh|comedy)/i, response: 'jokes' },
+                    { pattern: /(what can you|help me|capabilities|what do you do|features)/i, response: 'capabilities' },
+                    { pattern: /(fact|interesting|amazing|did you know|tell me something)/i, response: 'facts' },
+                    { pattern: /(quantum computing|quantum|qubits|superposition)/i, response: 'quantum' },
+                    { pattern: /(poem|poetry|story|creative|write something|creative writing)/i, response: 'creative' },
+                    { pattern: /(safe|safety|content filter|appropriate|guidelines)/i, response: 'safety' },
+                    { pattern: /calculate|math|(\d+\s*[\+\-\*\/]\s*\d+)/i, response: 'calculation' }
+                ];
+            }
+
+            async sendMessage(text = null) {
+                const message = text || this.messageInput.value.trim();
+                if (!message || this.isTyping) return;
+
+             
+                const filterResult = this.filterContent(message);
+                if (filterResult.filtered) {
+                    this.showNotification(`Message filtered: ${filterResult.reason}`, 'warning');
+                    this.addMessage(message, 'user');
+                    this.messageInput.value = '';
+                    this.autoResize(this.messageInput);
+                    
+                    setTimeout(() => {
+                        this.addMessage(filterResult.message, 'ai');
+                    }, 500);
+                    return;
+                }
+
+        
+                if (this.messages.length === 0) {
+                    this.suggestions.style.display = 'none';
+                }
+
+           
+                this.addMessage(message, 'user');
+                this.messageInput.value = '';
+                this.autoResize(this.messageInput);
+                
+           
+                this.showTyping();
+                
+          
+                setTimeout(() => {
+                    const response = this.generateResponse(message);
+                    this.hideTyping();
+                    this.addMessage(response, 'ai');
+                    if (this.settings.autoSave) {
+                        this.saveChatHistory();
+                    }
+                }, 1000 + Math.random() * 2000);
+            }
+
+            generateResponse(userMessage) {
+                const message = userMessage.toLowerCase();
+                
+               
+                if (this.isCalculation(message)) {
+                    return this.handleCalculation(message);
+                }
+                
+             
+                for (let item of this.patterns) {
+                    if (item.pattern.test(message)) {
+                        const responses = this.responses[item.response];
+                        if (responses && responses.length > 0) {
+                            return responses[Math.floor(Math.random() * responses.length)];
+                        }
+                    }
+                }
+                
+             
+                if (message.includes('time') || message.includes('date')) {
+                    const now = new Date();
+                    return `The current time is ${now.toLocaleTimeString()} and today's date is ${now.toLocaleDateString()}. 🕐`;
+                }
+                
+                if (message.includes('weather')) {
+                    return "I don't have access to real-time weather data, but I recommend checking a reliable weather service like Weather.com or your local weather app for current conditions. 🌤️";
+                }
+                
+                if (message.includes('name') || message.includes('who are you')) {
+                    return "I'm AURAA, your advanced AI assistant! I'm designed with enhanced safety features and content filtering to ensure our conversations remain helpful, respectful, and appropriate. 🤖✨";
+                }
+                
+                if (message.includes('age') || message.includes('old')) {
+                    return "I don't have an age in the traditional sense - I'm a digital assistant created to help and communicate with users like yourself! Think of me as a timeless companion ready to assist. ⏰";
+                }
+                
+                if (message.includes('learn') || message.includes('study') || message.includes('education')) {
+                    return "I'd love to help with your learning! I can explain concepts, break down complex topics, provide study tips, or help with homework across many subjects. What are you studying? 📚✨";
+                }
+                
+                return this.generateContextualResponse(message);
+            }
+
+            isCalculation(message) {
+                return /\d+\s*[\+\-\*\/]\s*\d+/.test(message) || 
+                       message.includes('calculate') || 
+                       message.includes('math') ||
+                       message.includes('plus') ||
+                       message.includes('minus') ||
+                       message.includes('times') ||
+                       message.includes('divided');
+            }
+
+            handleCalculation(message) {
+                try {
+                    const mathMatch = message.match(/(\d+(?:\.\d+)?)\s*([\+\-\*\/])\s*(\d+(?:\.\d+)?)/);
+                    if (mathMatch) {
+                        const num1 = parseFloat(mathMatch[1]);
+                        const operator = mathMatch[2];
+                        const num2 = parseFloat(mathMatch[3]);
+                        
+                        let result;
+                        switch (operator) {
+                            case '+':
+                                result = num1 + num2;
+                                break;
+                            case '-':
+                                result = num1 - num2;
+                                break;
+                            case '*':
+                                result = num1 * num2;
+                                break;
+                            case '/':
+                                result = num2 !== 0 ? num1 / num2 : 'Error: Division by zero';
+                                break;
+                        }
+                        
+                        return `🧮 **Calculation Result:**\n${num1} ${operator} ${num2} = **${result}**\n\nNeed help with more calculations? Just ask!`;
+                    }
+                    
+                    return "I can help with calculations! Try asking me something like 'calculate 25 * 47' or '100 / 4'. 🔢";
+                } catch (error) {
+                    return "I had trouble with that calculation. Please try a simpler format like '25 + 30'. 🤔";
+                }
+            }
+
+            generateContextualResponse(message) {
+                const contextualResponses = [
+                    "That's an interesting question! While I may not have specific information on that exact topic, I'm happy to explore related concepts or help you think through it step by step. 🤔💭",
+                    "I appreciate your curiosity! Though I might not have all the details on that particular subject, I can try to help from a different angle or suggest ways to explore it further. 🧭",
+                    "Great question! While that specific topic might be outside my current knowledge base, I'd love to help you brainstorm or approach it from a logical perspective. 💡",
+                    "That's thought-provoking! I may not have comprehensive information on that, but I can certainly help you think through related ideas or break down the problem. 🎯"
+                ];
+                
+                let baseResponse = contextualResponses[Math.floor(Math.random() * contextualResponses.length)];
+                
+                if (message.includes('create') || message.includes('make') || message.includes('build')) {
+                    baseResponse += "\n\n🎨 I love helping with creative projects! I can assist with writing, planning, brainstorming, or providing step-by-step guidance. What would you like to create?";
+                } else if (message.includes('explain') || message.includes('understand')) {
+                    baseResponse += "\n\n📖 I'm great at breaking down complex topics into understandable explanations. Feel free to ask about any concept you'd like me to clarify!";
+                }
+                
+                return baseResponse;
+            }
+
+           
+            loadUserSession() {
+                const userData = localStorage.getItem('ariaUserData');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    this.userName = user.name;
+                    this.userLoggedIn = true;
+                    this.updateUserProfile();
+                }
+            }
+
+            updateUserProfile() {
+                const userProfile = document.getElementById('userProfile');
+                const userAvatar = document.getElementById('userAvatar');
+                const userName = document.getElementById('userName');
+                
+                if (this.userLoggedIn) {
+                    userProfile.classList.remove('hidden');
+                    userAvatar.textContent = this.userName.charAt(0).toUpperCase();
+                    userName.textContent = this.userName;
+                    
+                  
+                    const loginBtn = document.querySelector('[onclick="openAuth()"]');
+                    if (loginBtn) loginBtn.style.display = 'none';
+                } else {
+                    userProfile.classList.add('hidden');
+                }
+            }
+
+      
+            addMessage(content, type) {
+                const message = {
+                    content: content,
+                    type: type,
+                    timestamp: new Date()
+                };
+                
+                this.messages.push(message);
+                this.renderMessage(message);
+                this.scrollToBottom();
+            }
+
+            renderMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${message.type}`;
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = message.type === 'user' ? (this.userLoggedIn ? this.userName.charAt(0).toUpperCase() : 'U') : 'AI';
+                
+                const content = document.createElement('div');
+                content.className = 'message-content';
+                
+                const bubble = document.createElement('div');
+                bubble.className = 'message-bubble';
+                bubble.innerHTML = this.formatMessageContent(message.content);
+                
+                const time = document.createElement('div');
+                time.className = 'message-time';
+                time.textContent = this.formatTime(message.timestamp);
+                
+                content.appendChild(bubble);
+                content.appendChild(time);
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(content);
+                
+                const welcomeMessage = this.chatMessages.querySelector('.welcome-message');
+                if (welcomeMessage) {
+                    welcomeMessage.remove();
+                }
+                
+                this.chatMessages.appendChild(messageDiv);
+            }
+
+            formatMessageContent(content) {
+                return content
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+            }
+
+            showTyping() {
+                this.isTyping = true;
+                this.typingIndicator.style.display = 'flex';
+                this.sendBtn.disabled = true;
+                this.scrollToBottom();
+            }
+
+            hideTyping() {
+                this.isTyping = false;
+                this.typingIndicator.style.display = 'none';
+                this.sendBtn.disabled = false;
+            }
+
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                }, 100);
+            }
+
+            formatTime(date) {
+                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            saveChatHistory() {
+                if (this.settings.saveHistory) {
+                    localStorage.setItem('enhancedAriaChatHistory', JSON.stringify(this.messages));
+                }
+            }
+
+            loadChatHistory() {
+                if (this.settings.saveHistory) {
+                    const saved = localStorage.getItem('enhancedAriaChatHistory');
+                    if (saved) {
+                        this.messages = JSON.parse(saved);
+                        this.messages.forEach(message => {
+                            message.timestamp = new Date(message.timestamp);
+                            this.renderMessage(message);
+                        });
+                        
+                        if (this.messages.length > 0) {
+                            this.suggestions.style.display = 'none';
+                        }
+                    }
+                }
+            }
+
+            clearChat() {
+                this.messages = [];
+                this.chatMessages.innerHTML = `
+                    <div class="welcome-message">
+                        <h3 class="welcome-title">Chat Cleared! ✨</h3>
+                        <p class="welcome-subtitle">Ready for a fresh conversation with enhanced safety features.</p>
+                    </div>
+                `;
+                this.suggestions.style.display = 'flex';
+                localStorage.removeItem('enhancedAriaChatHistory');
+                this.showNotification('Chat history cleared', 'success');
+            }
+
+            exportChat() {
+                if (this.messages.length === 0) {
+                    this.showNotification('No messages to export', 'error');
+                    return;
+                }
+
+                const chatText = `AURAA Enhanced AI Assistant - Chat Export\nGenerated: ${new Date().toLocaleString()}\nUser: ${this.userName}\n\n` +
+                    this.messages.map(msg => 
+                        `[${this.formatTime(msg.timestamp)}] ${msg.type.toUpperCase()}: ${msg.content}`
+                    ).join('\n\n');
+
+                const blob = new Blob([chatText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `aria-enhanced-chat-${new Date().toISOString().split('T')[0]}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+                this.showNotification('Chat exported successfully', 'success');
+            }
+
+            showNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.classList.add('show'), 100);
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            autoResize(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+            }
+        }
+
+        
+        function acceptTerms() {
+            localStorage.setItem('ariaTermsAccepted', 'true');
+            document.getElementById('termsOverlay').style.display = 'none';
+            aiAgent.loadUserSession();
+            aiAgent.loadChatHistory();
+        }
+
+        function declineTerms() {
+            window.location.href = 'about:blank';
+        }
+
+        function openAuth() {
+            document.getElementById('authOverlay').classList.remove('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.add('hidden'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Form').classList.remove('hidden');
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (email && password) {
+               
+                const userData = { name: email.split('@')[0], email: email };
+                localStorage.setItem('ariaUserData', JSON.stringify(userData));
+                aiAgent.userName = userData.name;
+                aiAgent.userLoggedIn = true;
+                aiAgent.updateUserProfile();
+                document.getElementById('authOverlay').classList.add('hidden');
+                aiAgent.showNotification('Successfully logged in!', 'success');
+            }
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            if (name && email && password) {
+               
+                const userData = { name: name, email: email };
+                localStorage.setItem('ariaUserData', JSON.stringify(userData));
+                aiAgent.userName = userData.name;
+                aiAgent.userLoggedIn = true;
+                aiAgent.updateUserProfile();
+                document.getElementById('authOverlay').classList.add('hidden');
+                aiAgent.showNotification('Account created successfully!', 'success');
+            }
+        }
+
+        function continueAsGuest() {
+            document.getElementById('authOverlay').classList.add('hidden');
+        }
+
+        function openSettings() {
+            document.getElementById('settingsOverlay').classList.remove('hidden');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsOverlay').classList.add('hidden');
+        }
+
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+
+        function toggleVoiceInput() {
+            aiAgent.showNotification('Voice input feature coming soon!', 'warning');
+        }
+
+        function attachFile() {
+            aiAgent.showNotification('File attachment feature coming soon!', 'warning');
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                aiAgent.sendMessage();
+            }
+        }
+
+        function autoResize(textarea) {
+            aiAgent.autoResize(textarea);
+        }
+
+        function sendSuggestion(text) {
+            aiAgent.sendMessage(text);
+        }
+
+        function sendMessage() {
+            aiAgent.sendMessage();
+        }
+
+        function clearChat() {
+            aiAgent.clearChat();
+        }
+
+        function exportChat() {
+            aiAgent.exportChat();
+        }
+
+  
+        let aiAgent;
+        document.addEventListener('DOMContentLoaded', () => {
+            aiAgent = new EnhancedAIAgent();
+        });
+    </script>
+</body>
+</html>
