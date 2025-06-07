@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAA's Pricing Plans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+     
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-font: 'Poppins', sans-serif;
+            --secondary-font: 'Playfair Display', serif;
+            --gold: #D4AF37;
+            --gold-light: #F8F0D7;
+            --dark: #1E1E2F;
+            --light: #FFFFFF;
+            --grey: #94979A;
+            --gradient-bg: linear-gradient(135deg, #1E1E2F 0%, #2D2D4A 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --hover-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+        }
+
+        body {
+            font-family: var(--primary-font);
+            background: var(--gradient-bg);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .main-title {
+            font-family: var(--secondary-font);
+            font-size: 3rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .main-title span {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .main-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0.7);
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--grey);
+            margin-bottom: 60px;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: relative;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) rotateX(10deg);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 50%, rgba(212, 175, 55, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .premium {
+            background: rgba(30, 30, 47, 0.8);
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .premium:hover {
+            transform: translateY(-15px) rotateX(10deg) scale(1.05);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            padding: 30px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tier {
+            font-family: var(--secondary-font);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .premium .tier {
+            color: var(--gold);
+        }
+
+        .price {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .currency {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 5px;
+            color: var(--gold-light);
+        }
+
+        .amount {
+            font-size: 4rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .premium .amount {
+            color: var(--gold);
+        }
+
+        .period {
+            font-size: 0.9rem;
+            color: var(--grey);
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .features .not-included {
+            color: var(--grey);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .features .not-included::before {
+            content: "✕";
+            color: var(--grey);
+        }
+
+        .select-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-family: var(--primary-font);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .select-btn:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .premium .select-btn {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+        }
+
+        .premium .select-btn:hover {
+            background: #C19B2B;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .shine {
+            opacity: 1;
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(30deg) translateX(-100%);
+            }
+            100% {
+                transform: rotate(30deg) translateX(100%);
+            }
+        }
+
+        .card.selected {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .card.pulse {
+            animation: pulse 0.5s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .card.clicked {
+            transform: scale(0.98) !important;
+            transition: transform 0.2s ease;
+        }
+
+        .features li {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        
+        @media (max-width: 1080px) {
+            .pricing-cards {
+                gap: 20px;
+            }
+            
+            .card {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card, .premium {
+                width: 100%;
+                max-width: 350px;
+                transform: none;
+            }
+            
+            .premium {
+                transform: none;
+                order: -1;
+            }
+            
+            .premium:hover {
+                transform: translateY(-15px) rotateX(10deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">AURAA's <span>Pricing</span> Plans</h1>
+        <p class="subtitle">Choose the perfect plan that suits your needs</p>
+        
+        <div class="pricing-cards">
+            <div class="card" data-tier="basic">
+                <div class="card-header">
+                    <div class="tier">Free</div>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">0</span>
+                        <span class="period">/month</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="features">
+                        <li>Single user</li>
+                        <li>500 Messages</li>
+                        <li>1GB storage</li>
+                        <li>Basic support</li>
+                        <li class="not-included">Priority access</li>
+                        <li class="not-included">Custom canvas</li>
+                    </ul>
+                    <a href="your-linked-page.html" class="select-btn">Continue</a>
+                </div>
+                <div class="shine"></div>
+            </div>
+            
+            <div class="card premium" data-tier="premium">
+                <div class="popular-tag">Most Popular</div>
+                <div class="card-header">
+                    <div class="tier">Premium</div>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">10</span>
+                        <span class="period">/month</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="features">
+                        <li>Up to 5 users</li>
+                        <li>Unlimited Messages</li>
+                        <li>1TB storage</li>
+                        <li>Priority support</li>
+                        <li>Priority access</li>
+                        <li class="not-included">Custom canvas</li>
+                    </ul>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+                <div class="shine"></div>
+            </div>
+            
+            <div class="card" data-tier="enterprise">
+                <div class="card-header">
+                    <div class="tier">Team</div>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">50</span>
+                        <span class="period">/month</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <ul class="features">
+                        <li>Unlimited users</li>
+                        <li>Unlimited Messages</li>
+                        <li>Unlimited storage</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Priority access</li>
+                        <li>Custom canvas</li>
+                    </ul>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+                <div class="shine"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            
+           
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 15;
+                    const rotateX = (centerY - y) / 15;
+                    
+                   
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    
+                    
+                    const shine = card.querySelector('.shine');
+                    shine.style.opacity = "1";
+                    shine.style.transform = `rotate(30deg) translateX(${x / 10}%)`;
+                });
+                
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                    const shine = card.querySelector('.shine');
+                    shine.style.opacity = "0";
+                });
+                
+              
+                card.addEventListener('click', function() {
+                    this.classList.add('clicked');
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 500);
+                });
+            });
+            
+            
+            const amounts = document.querySelectorAll('.amount');
+            amounts.forEach(amount => {
+                const targetValue = parseInt(amount.textContent);
+                animateValue(amount, 0, targetValue, 1500);
+            });
+            
+            
+            const selectButtons = document.querySelectorAll('.select-btn');
+            selectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.card');
+                    const tier = card.dataset.tier;
+                    
+                    
+                    cards.forEach(c => c.classList.remove('selected'));
+                    
+                   
+                    card.classList.add('selected');
+                    
+                   
+                    card.classList.add('pulse');
+                    setTimeout(() => {
+                        card.classList.remove('pulse');
+                    }, 500);
+                    
+                    
+                    console.log(`Selected tier: ${tier}`);
+                });
+            });
+
+            
+            const featuresList = document.querySelectorAll('.features li');
+            featuresList.forEach((item, index) => {
+                item.style.animationDelay = `${index * 100 + 300}ms`;
+            });
+        });
+
+        
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
+</body>
+</html>
